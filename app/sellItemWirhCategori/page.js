@@ -1,6 +1,6 @@
 'use client'
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import apiKey from '../API';
 import { useSearchParams } from 'next/navigation';
 import { FaShoppingBasket } from "react-icons/fa";
@@ -9,7 +9,7 @@ import { TbFilterOff } from "react-icons/tb";
 
 
 
-export default function SearchCompone() {
+function SearchCompone() {
     const sParams = useSearchParams();
     const onvan = sParams.get("onvan");
 

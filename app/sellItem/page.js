@@ -16,7 +16,7 @@ import { BsBasket2Fill } from "react-icons/bs";
 import Soshal from "../component/Home/soshal/soshal";
 import Footer from "../component/Home/footer/Footer";
 
-export default function SearchComponen() {
+function SearchComponen() {
   const [selectedColor, setselectedColor] = useState("");
   const [selectedQuantity, setselectedQuantity] = useState(1);
   const [ee, setee] = useState("");
