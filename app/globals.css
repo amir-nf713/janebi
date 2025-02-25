@@ -2,20 +2,94 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.sc::-webkit-scrollbar {
+	display: none;
   }
+
+body{
+  background: #EBEBEB;
+  direction: rtl;
+  overflow-x: hidden;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.loginbg{
+	background-image: url(../public/banner.jpg);
+	width: 100%;
+	height: 100vh;
+	position: fixed; 
+	background-attachment: fixed;
+	background-size: cover; 
+	background-repeat: no-repeat;
 }
+
+.bg-img{
+	background-image: url(../public/banner.jpg);
+	width: 100%;
+	height: 80vh;
+	background-attachment: fixed;
+	background-size: cover; 
+	background-repeat: no-repeat;
+}
+
+@font-face {
+	font-family: Doran;
+	font-style: normal;
+	font-weight: 100;
+	src: url('./Fonts/woff/Doran-Thin.woff') format('woff'),   
+	url('./Fonts/woff2/Doran-Thin.woff2') format('woff2');		
+}
+
+@font-face {
+	font-family: Doran;
+	font-style: normal;
+	font-weight: 300;
+	src: url('./Fonts/woff/Doran-Light.woff') format('woff'),   
+	url('./Fonts/woff2/Doran-Light.woff2') format('woff2');	
+}
+
+@font-face {
+	font-family: Doran;
+	font-style: normal;
+	font-weight: normal;
+	src: url('./Fonts/woff/Doran-Regular.woff') format('woff'),   
+	url('./Fonts/woff2/Doran-Regular.woff2') format('woff2');		 
+}
+
+@font-face {
+	font-family: Doran;
+	font-style: normal;
+	font-weight: 500;
+	src: url('./Fonts/woff/Doran-Medium.woff') format('woff'),   
+	url('./Fonts/woff2/Doran-Medium.woff2') format('woff2');		 
+}
+
+@font-face {
+	font-family: Doran;
+	font-style: normal;
+	font-weight: bold;
+	src: url('./Fonts/woff/Doran-Bold.woff') format('woff'),   
+	url('./Fonts/woff2/Doran-Bold.woff2') format('woff2');		 
+}
+
+@font-face {
+	font-family: Doran;
+	font-style: normal;
+	font-weight: 800;
+	src: url('./Fonts/woff/Doran-ExtraBold.woff') format('woff'),   
+	url('./Fonts/woff2/Doran-ExtraBold.woff2') format('woff2');	 
+}
+
+.au{
+	all: unset;
+}
+
+.color-circle {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  .color-circle.active {
+    height: 48px;
+	width: 48px;
+    border-color: rgb(0, 0, 0);
+  }
