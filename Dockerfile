@@ -1,18 +1,22 @@
-# Use official Node.js image
+# Dockerfile for Frontend
+
+# از تصویر پایه Node.js استفاده می‌کنیم
 FROM node:18-alpine
 
-# Set working directory
+# پوشه کاری را تنظیم می‌کنیم
 WORKDIR /app
 
-# Copy package.json and install dependencies
+# فایل‌ها را کپی می‌کنیم
 COPY package.json package-lock.json ./
+
+# نصب وابستگی‌ها
 RUN npm install
 
-# Copy project files
+# کپی کردن باقی فایل‌ها
 COPY . .
 
-# Expose application port
-EXPOSE 3000
+# ساخت اپلیکیشن در حالت تولید
+RUN npm run build
 
-# Start application
+# اجرا کردن سرور در حالت تولید
 CMD ["npm", "start"]
