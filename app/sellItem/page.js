@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import Nav from "../component/Home/nav/Nav";
@@ -16,7 +16,7 @@ import { BsBasket2Fill } from "react-icons/bs";
 import Soshal from "../component/Home/soshal/soshal";
 import Footer from "../component/Home/footer/Footer";
 
-export default function Pagee() {
+export default function SearchComponen() {
   const [selectedColor, setselectedColor] = useState("");
   const [selectedQuantity, setselectedQuantity] = useState(1);
   const [ee, setee] = useState("");
@@ -469,5 +469,14 @@ export default function Pagee() {
         </div>
       </div>
     </div>
+  );
+
+}
+
+export default function Page() {
+  return (
+      <Suspense fallback={<div>در حال بارگذاری...</div>}>
+          <SearchComponen />
+      </Suspense>
   );
 }

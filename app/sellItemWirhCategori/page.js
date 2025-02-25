@@ -9,7 +9,7 @@ import { TbFilterOff } from "react-icons/tb";
 
 
 
-export default function Page() {
+export default function SearchCompone() {
     const sParams = useSearchParams();
     const onvan = sParams.get("onvan");
 
@@ -151,3 +151,11 @@ export default function Page() {
         </div>
     );
 }
+
+export default function Page() {
+    return (
+        <Suspense fallback={<div>در حال بارگذاری...</div>}>
+            <SearchCompone />
+        </Suspense>
+    );
+  }
