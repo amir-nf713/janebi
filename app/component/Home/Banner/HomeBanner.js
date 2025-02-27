@@ -14,7 +14,7 @@ export default function HomeBanner() {
               <a href='#' className='h-24 max-Wide-mobile-s:h-10 max-Wide-mobile-s:w-32 max-Wide-mobile-4xl:mt-2 flex justify-center max-Wide-mobile-4xl:text-sm max-Wide-mobile-4xl:h-12 max-Wide-mobile-4xl:w-40 items-center mt-6 max-tablet-l:w-56 max-tablet-l:h-16 w-[440px] max-desktop-s:text-2xl max-desktop-s:w-[270px] max-desktop-s:h-20 text-4xl bg-blue-950 rounded-full border-2 border-white'>مشاهده تخفیف ها</a>
             </div>
             <div className="text-2xl max-Wide-mobile-s:text-[9px] max-Wide-mobile-4xl:text-sm font-dorna max-tablet-l:text-lg font-extrabold text-slate-300">
-                امور مشتریان : 09001234567
+                امور مشتریان : 09966820923
             </div>
         </div>
       

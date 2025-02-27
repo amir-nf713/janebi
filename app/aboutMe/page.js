@@ -7,7 +7,7 @@ export default function About() {
       {/* ✅ هدر صفحه */}
       <header className="w-full bg-blue-600 py-12 text-white text-center">
         <h1 className="text-4xl font-extrabold">درباره ما</h1>
-        <p className="text-lg mt-2">ما که هستیم و چه کاری انجام می‌دهیم؟</p>
+        <p className="text-lg mt-2">ما چه کسی هستیم و چه کاری انجام می‌دهیم؟</p>
       </header>
 
       {/* ✅ بخش معرفی */}
@@ -28,13 +28,7 @@ export default function About() {
            
           ].map((member, index) => (
             <div key={index} className="bg-white shadow-md rounded-lg p-6 text-center">
-              <Image
-                src={member.image}
-                width={120}
-                height={120}
-                className="rounded-full mx-auto"
-                alt={member.name}
-              />
+             
               <h3 className="text-xl font-semibold mt-4">{member.name}</h3>
               <p className="text-gray-600">{member.role}</p>
             </div>

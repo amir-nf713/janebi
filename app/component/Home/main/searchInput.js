@@ -59,7 +59,7 @@ export default function SearchInput() {
                 className="text-xl tablet-l:text-lg laptop-l:text-xl desktop-xl:text-2xl
                            font-dorna font-semibold pr-5 text-gray-600 bg-gray-300 
                            w-[90%] tablet-l:w-[400px] laptop-l:w-[600px] desktop-xl:w-[700px] 
-                           h-12 laptop-l:h-14 desktop-xl:h-16 rounded-r-full"
+                           h-12 laptop-l:h-14 desktop-xl:h-16 rounded-r-full mr-3"
                 type="text"
             />
 
@@ -69,7 +69,7 @@ export default function SearchInput() {
                 className="bg-black text-white cursor-pointer flex justify-center items-center
                            text-3xl laptop-l:text-4xl desktop-xl:text-5xl
                            w-16 tablet-l:w-20 laptop-l:w-24 desktop-xl:w-28 
-                           h-12 laptop-l:h-14 desktop-xl:h-16 rounded-l-full"
+                           h-12 laptop-l:h-14 desktop-xl:h-16 rounded-l-full ml-3"
             >
                 <BsSearch />
             </span>

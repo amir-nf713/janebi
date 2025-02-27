@@ -6,10 +6,15 @@ import { useSearchParams } from 'next/navigation';
 import { FaShoppingBasket } from "react-icons/fa";
 import { FaFilter } from "react-icons/fa";
 import { TbFilterOff } from "react-icons/tb";
+import { useRouter } from 'next/navigation';
 
 
 
 function SearchCompone() {
+     const router = useRouter()
+    const jh = (e) => {
+        router.push(`/sellItem?id=${e}`)
+    }
     const sParams = useSearchParams();
     const onvan = sParams.get("onvan");
 
@@ -140,7 +145,7 @@ function SearchCompone() {
                                 
                             
                             <div className="text-neutral-600 max-Wide-mobile-3xl:text-sm max-Wide-mobile-s:hidden mt-6 font-bold text-xl">{item.tozih[0]}</div>
-                            <button className="flex bg-sky-600 max-Wide-mobile-s:w-11/12 text-white py-3 mt-5 w-[200px] flex-row-reverse justify-center items-center">
+                            <button onClick={() => jh(item._id)} className="flex bg-sky-600 max-Wide-mobile-s:w-11/12 text-white py-3 mt-5 w-[200px] flex-row-reverse justify-center items-center">
                                 <span className="mx-3">افزودن به سبد خرید</span>
                                 <span className=""><FaShoppingBasket /></span>
                             </button>

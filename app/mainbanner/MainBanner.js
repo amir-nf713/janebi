@@ -9,7 +9,7 @@ export default function MainBanner() {
       </div>
       <div className="items-start w-full flex flex-col">
         <p className="max-mobile-xl:text-lg max-tablet-l:text-2xl text-4xl text-white m-3">تضمین کیفیت</p>
-        <p className="max-mobile-xl:text-lg max-tablet-l:text-2xl text-4xl text-white m-3">فروشگاه تخصصی گارد و لوازم جانبی مبایل</p>
+        <p className="max-mobile-xl:text-lg max-tablet-l:text-2xl text-4xl text-white m-3">فروشگاه تخصصی گارد و لوازم جانبی موبایل</p>
         <p className="max-mobile-xl:text-lg max-tablet-l:text-2xl text-4xl text-white m-3">به روزترین و متنوع ترین کاورهای گوش های تلفن همراه</p>
       </div>
       <button className="max-mobile-xl:text-xl max-mobile-xl:h-14 max-mobile-xl:w-52 max-Wide-mobile-2xl:h-16 max-Wide-mobile-2xl:w-64 max-Wide-mobile-2xl:text-2xl bg-white shadow-xl shadow-black/35 cursor-pointer hover:shadow-black/70 hover:shadow-2xl h-20 text-3xl  w-80 ">مشاهده محصولات</button>

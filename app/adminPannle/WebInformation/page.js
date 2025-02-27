@@ -9,7 +9,8 @@ export default function ContactForm() {
         telegram: '',
         whatsapp: '',
         instagram: '',
-        amount: 0
+        amount: 0,
+        post: 0
     });
 
     const handleChange = (e) => {
@@ -26,6 +27,7 @@ export default function ContactForm() {
             telegram : formData.telegram,
             wahtsapp : formData.wahtsapp,
             monyDavat : formData.amount,
+            postMoney : formData.post,
         }).then(data => {
              router.push("/adminPannle")
         })
@@ -64,7 +66,15 @@ export default function ContactForm() {
                     name="amount" 
                     value={formData.amount} 
                     onChange={handleChange} 
-                    placeholder="مقدار پول"
+                    placeholder="هدیه دعوت"
+                    className="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                />
+                <input 
+                    type="text" 
+                    name="post" 
+                    value={formData.post} 
+                    onChange={handleChange} 
+                    placeholder="هزینه پست"
                     className="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 />
                 <button onClick={sub} className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">ذخیره</button>

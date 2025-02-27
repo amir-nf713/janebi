@@ -32,7 +32,7 @@ export default function Home() {
 
       <main>
         <SearchInput></SearchInput>
-        <Tag></Tag>
+        
         {/* -------------------- */}
         
         <Categoris ref={targetRef} />
@@ -52,6 +52,7 @@ export default function Home() {
         
 
         <MainBanner></MainBanner>
+        {/* <Tag></Tag> */}
         <FullCategori />
         
         

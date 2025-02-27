@@ -10,7 +10,7 @@ export default function TrackingOrder() {
 
       {/* ✅ دکمه هدایت به تلگرام */}
       <a
-        href="" // ❗ لینک تلگرام خود را جایگزین کنید
+        href="https://t.me/alit49211" // ❗ لینک تلگرام خود را جایگزین کنید
         target="_blank"
         rel="noopener noreferrer"
         className="mt-6 flex items-center px-6 py-3 bg-blue-500 text-white rounded-full text-xl font-bold shadow-lg hover:bg-blue-600 transition-all"
