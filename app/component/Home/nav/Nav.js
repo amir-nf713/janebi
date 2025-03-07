@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { useRef } from "react";
 import { MdOutlineFilterListOff } from "react-icons/md";
+import SearchInput from "../main/searchInput";
 
 
 export default function Nav({ targetRef }) {
@@ -69,6 +70,7 @@ export default function Nav({ targetRef }) {
             <FaUser />
           </span>
         </div>
+        <SearchInput></SearchInput>
       </div>
 
       <img className="h-full w-auto bg-transparent" src="/Frame_395-removebg-preview.png" alt="" />

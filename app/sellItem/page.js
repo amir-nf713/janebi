@@ -260,7 +260,7 @@ function SearchComponen() {
                     </span>
                   </div>
                 </div>
-                <div className="text-lg desktop-s:text-3xl bg-slate-400 px-6 py-3 rounded-full">{`${Item.offer}% تخفیف`}</div>
+                <div className="text-lg max-Wide-mobile-s:hidden desktop-s:text-3xl bg-slate-400 px-6 py-3 rounded-full">{`${Item.offer}% تخفیف`}</div>
               </div>
             ) : (
               <div className="text-2xl desktop-s:text-4xl font-extrabold text-sky-700">
@@ -439,7 +439,7 @@ function SearchComponen() {
         <Footer />
       </div>
 
-      <div className="w-full flex flex-row justify-between items-center px-8 bg-slate-200 sticky bottom-0 h-16">
+      <div className="w-full flex flex-row justify-between items-center px-8 bg-slate-200 sticky bottom-0 h-16 max-mobile-xl:px-3">
         <button
           onClick={() =>
             addToCart({
@@ -449,7 +449,7 @@ function SearchComponen() {
               model: ee,
             })
           }
-          className="bg-blue-950 text-white px-6 py-3 rounded-lg text-lg font-bold flex items-center disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="bg-blue-950 max-Wide-mobile-s:w-[55%] max-Wide-mobile-s:flex max-Wide-mobile-s:justify-center max-Wide-mobile-s:items-center max-Wide-mobile-s:text-xs max-Wide-mobile-s:h-[80%] text-white px-6 py-3 rounded-lg text-lg font-bold flex items-center disabled:bg-gray-400 disabled:cursor-not-allowed max-mobile-xl:w-[60%]"
           disabled={!selectedColor || !selectedQuantity || !ee}
         >
           <BsBasket2Fill className="ml-2" />
@@ -461,7 +461,7 @@ function SearchComponen() {
             <>افزودن به سبد خرید</>
           )}
         </button>
-        <div className="text-xl font-extrabold">
+        <div className="text-xl max-Wide-mobile-s:text-sm font-extrabold">
           {(
             Math.floor(((Item.money / 100) * (100 - Item.offer)) / 1000) * 1000
           ).toLocaleString()}{" "}

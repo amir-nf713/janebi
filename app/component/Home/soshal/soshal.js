@@ -28,10 +28,18 @@ export default function Soshal() {
         {
             Basket.map((item, index) => {
              return(
-                <div key={index} className="text-5xl flex max-mobile-l:text-3xl justify-center items-center w-full h-20 bg-sky-600">
-                  <Link className='mx-6 text-white' href={`${item.instagram}`}><FaSquareInstagram /></Link>
-                  <Link className='mx-6 text-white' href={`${item.telegram}`}><FaTelegram /></Link>
-                  <Link className='mx-6 text-white' href={`${item.wahtsapp}`}><IoLogoWhatsapp /></Link>
+                <div key={index} className="text-5xl flex max-mobile-l:text-3xl justify-center items-center w-full h-24 bg-sky-800">
+                  <Link className='mx-6 text-white ' href={`${item.instagram}`}>
+                     <img src="ico/67c7195642931.png" className='size-20 max-Wide-mobile-s:size-16 max-mobile-l:size-12 ' alt="img" />
+                  </Link>
+
+                  <Link className='mx-6 text-white ' href={`${item.telegram}`}>
+                      <img src="ico/67c719811ab3e.png" className='size-20 max-Wide-mobile-s:size-16 max-mobile-l:size-12 ' alt="img" />
+                  </Link>
+
+                  <Link className='mx-6 text-white ' href={`${item.wahtsapp}`}>
+                      <img src="ico/67c719c6f2533.png" className='size-20 max-Wide-mobile-s:size-16 max-mobile-l:size-12 ' alt="img" />
+                  </Link>
                 </div>
              )
             })
