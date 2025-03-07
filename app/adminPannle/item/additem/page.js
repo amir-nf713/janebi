@@ -135,14 +135,17 @@ export default function Page() {
 
   return (
     <div className="w-full flex flex-col items-center bg-sky-500 p-5">
-      <label htmlFor="file-upload" className="cursor-pointer flex flex-col items-center justify-center w-64 h-40 border-2 border-dashed border-gray-400 rounded-lg bg-gray-50 hover:bg-gray-100 transition">
-        {selectedImage ? (
-          <img src={selectedImage} alt="Uploaded" className="w-full h-full object-cover rounded-lg" />
-        ) : (
-          <span className="text-gray-600">یک عکس انتخاب کنید</span>
-        )}
-      </label>
-      <input id="file-upload" type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
+      <div className="">
+         <label htmlFor="file-upload" className="cursor-pointer flex flex-col items-center justify-center w-64 h-40 border-2 border-dashed border-gray-400 rounded-lg bg-gray-50 hover:bg-gray-100 transition">
+             {selectedImage ? (
+               <img src={selectedImage} alt="Uploaded" className="w-full h-full object-cover rounded-lg" />
+           ) : (
+               <span className="text-gray-600">یک عکس انتخاب کنید</span>
+           )}
+          </label>
+          <input id="file-upload" type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
+      </div>
+        
 
       <input type="text" placeholder="عنوان" value={onvan} onChange={handleInputChange("onvan")} className="w-full text-xl h-11 mt-3 pr-3 bg-white" />
 
