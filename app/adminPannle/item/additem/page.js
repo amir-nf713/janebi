@@ -8,6 +8,9 @@ import { useRouter } from "next/navigation";
 export default function Page() {
     const router = useRouter()
   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage2, setSelectedImage2] = useState(null);
+  const [selectedImage3, setSelectedImage3] = useState(null);
+  const [selectedImage4, setSelectedImage4] = useState(null);
   const [formData, setFormData] = useState({
     onvan: "",
     selectCategori: "",
@@ -34,14 +37,15 @@ export default function Page() {
       .catch(error => console.warn("خطا در دریافت دسته‌بندی‌ها", error));
   }, []);
 
-  const handleFileChange = useCallback((event) => {
+  const handleFileChange = useCallback((event, setImage) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => setSelectedImage(reader.result);
+      reader.onloadend = () => setImage(reader.result);
       reader.readAsDataURL(file);
     }
   }, []);
+ 
 
   const addInput = useCallback(() => setInputs([...inputs, { title: "", description: "" }]), [inputs]);
 
@@ -104,46 +108,76 @@ export default function Page() {
   };
 
   const submitHandler = () => {
-    const formattedInputs = inputs.map(input => `title: ${input.title} description: ${input.description}`);
-
-  // ارسال داده‌ها به شکل صحیح
-  axios.post(apiKey.postitem, {
-    onvan,
-    categori: selectCategori,
-    berand,
-    color: colors,
-    money,
-    offer: off,
-    tozih: miniTozih,
-    photo: selectedImage,
-    smallTozih: formattedInputs, // ارسال آرایه از رشته‌ها
-    devaiceOK: allDevise,
-    garanti,
-    tagSearch: allTagSearch,
-  }).then((response) => {
-    console.log("Response:", response);
-
-    if (response.data.massage === "data cant empty") {
-      setSubmitvalue("همه قسمت هارا پر کنید");
-    } if (response.data.message === "ok"){
-       router.back()
+    if (!onvan || !selectCategori || !berand || !money || !miniTozih || !garanti) {
+      setSubmitvalue("لطفا همه فیلدهای ضروری را پر کنید");
+      return;
     }
-  }).catch((error) => {
-    console.error("Error:", error);
-  });
+  
+    const formattedInputs = inputs.map(input => `title: ${input.title} description: ${input.description}`);
+  
+    axios.post(apiKey.postitem, {
+      onvan,
+      categori: selectCategori,
+      berand,
+      color: colors,
+      money,
+      offer: off,
+      tozih: miniTozih,
+      photo: `ph1:${selectedImage}ph2:${selectedImage2}ph3:${selectedImage3}ph4:${selectedImage4}`,
+      smallTozih: formattedInputs,
+      devaiceOK: allDevise,
+      garanti,
+      tagSearch: allTagSearch,
+    }).then((response) => {
+      if (response.data.message === "ok") {
+        router.back();
+      } else {
+        setSubmitvalue("خطا در ارسال داده‌ها");
+      }
+    }).catch((error) => {
+      console.error("Error:", error);
+      setSubmitvalue("خطا در ارسال داده‌ها");
+    });
   };
 
   return (
     <div className="w-full flex flex-col items-center bg-sky-500 p-5">
       <div className="">
-         <label htmlFor="file-upload" className="cursor-pointer flex flex-col items-center justify-center w-64 h-40 border-2 border-dashed border-gray-400 rounded-lg bg-gray-50 hover:bg-gray-100 transition">
+         <label htmlFor="file-upload1" className="cursor-pointer flex flex-col items-center justify-center w-64 h-40 border-2 border-dashed border-gray-400 rounded-lg bg-gray-50 hover:bg-gray-100 transition">
              {selectedImage ? (
                <img src={selectedImage} alt="Uploaded" className="w-full h-full object-cover rounded-lg" />
            ) : (
                <span className="text-gray-600">یک عکس انتخاب کنید</span>
            )}
           </label>
-          <input id="file-upload" type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
+          <input id="file-upload1" type="file" accept="image/*" onChange={(e) => handleFileChange(e, setSelectedImage)} className="hidden" />
+        
+         <label htmlFor="file-upload2" className="cursor-pointer flex flex-col items-center justify-center w-64 h-40 border-2 border-dashed border-gray-400 rounded-lg bg-gray-50 hover:bg-gray-100 transition">
+             {selectedImage2 ? (
+               <img src={selectedImage2} alt="Uploaded" className="w-full h-full object-cover rounded-lg" />
+           ) : (
+               <span className="text-gray-600">یک عکس انتخاب کنید</span>
+           )}
+          </label>
+          <input id="file-upload2" type="file" accept="image/*" onChange={(e) => handleFileChange(e, setSelectedImage2)} className="hidden" />
+        
+         <label htmlFor="file-upload3" className="cursor-pointer flex flex-col items-center justify-center w-64 h-40 border-2 border-dashed border-gray-400 rounded-lg bg-gray-50 hover:bg-gray-100 transition">
+             {selectedImage3 ? (
+               <img src={selectedImage3} alt="Uploaded" className="w-full h-full object-cover rounded-lg" />
+           ) : (
+               <span className="text-gray-600">یک عکس انتخاب کنید</span>
+           )}
+          </label>
+          <input id="file-upload3" type="file" accept="image/*" onChange={(e) => handleFileChange(e, setSelectedImage3)} className="hidden" />
+        
+         <label htmlFor="file-upload4" className="cursor-pointer flex flex-col items-center justify-center w-64 h-40 border-2 border-dashed border-gray-400 rounded-lg bg-gray-50 hover:bg-gray-100 transition">
+             {selectedImage4 ? (
+               <img src={selectedImage4} alt="Uploaded" className="w-full h-full object-cover rounded-lg" />
+           ) : (
+               <span className="text-gray-600">یک عکس انتخاب کنید</span>
+           )}
+          </label>
+          <input id="file-upload4" type="file" accept="image/*" onChange={(e) => handleFileChange(e, setSelectedImage4)} className="hidden" />
       </div>
         
 

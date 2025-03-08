@@ -199,6 +199,66 @@ function SearchComponen() {
 
   // console.log(user.Name);
 
+  const [Ph1, setPh1] = useState({f:"ph1:" ,t:"ph2:"})
+  const [Ph2, setPh2] = useState({f:"ph2:" ,t:"ph3:"})
+  const [Ph3, setPh3] = useState({f:"ph3:" ,t:"ph4:"})
+  const [Ph4, setPh4] = useState({f:"ph4:" ,t:"'"})
+
+  const [style1, setstyle1] = useState("hidden")
+  const [style2, setstyle2] = useState("hidden")
+  const [style3, setstyle3] = useState("hidden")
+  const ok1 = Item.photo?.split("ph2:")[1]?.split("ph3:")[0]
+  const ok2 = Item.photo?.split("ph3:")[1]?.split("ph4:")[0]
+  const ok3 = Item.photo?.split("ph4:")[1]?.split("'")[0]
+  
+useEffect(() => {
+  
+ if (/^data:image\/[a-z]+;base64,[A-Za-z0-9+/=]+$/.test(ok1)) {
+     setstyle1("")
+  }else{
+    setstyle1("hidden")
+  }
+ 
+ 
+  if (/^data:image\/[a-z]+;base64,[A-Za-z0-9+/=]+$/.test(ok2)) {
+     setstyle2("")
+  }else{
+    setstyle2("hidden")
+  }
+ 
+ 
+  if (/^data:image\/[a-z]+;base64,[A-Za-z0-9+/=]+$/.test(ok3)) {
+     setstyle3("")
+  }else{
+    setstyle3("hidden")
+  }
+}, [ok1 ,ok2 ,ok3])
+
+
+
+
+const changePH1 = () => {
+ 
+    setPh1(Ph2)
+    setPh2(Ph1)
+}
+
+
+
+const changePH2 = () => {
+  setPh1(Ph3)
+  setPh3(Ph1)
+}
+
+
+
+const changePH3 = () => {
+  setPh1(Ph4)
+  setPh4(Ph1)
+}
+
+
+
   return (
     <div className="font-dorna flex flex-col justify-center items-center">
       <Nav />
@@ -206,11 +266,38 @@ function SearchComponen() {
 
       <div className="mt-16 w-full flex flex-col items-center">
         <div className="flex flex-col desktop-s:flex-row items-center desktop-s:items-start">
-          <img
-            className="h-80 w-80 max-laptop-xl:h-64 max-laptop-xl:w-64 object-contain"
-            src={Item.photo}
-            alt="img"
-          />
+          <div className="flex flex-col justify-center items-center">
+            <div className="">
+             <img
+               className="h-80 w-80 max-laptop-xl:h-auto max-laptop-xl:w-11/12 object-contain border-2 rounded-3xl mb-2"
+               src={Item.photo?.split(`${Ph1.f}`)[1]?.split(`${Ph1.t}`)[0] || ""}
+               alt="img"
+             />
+            </div>
+
+            <div className="flex flex-row">
+             <img
+               onClick={changePH1}
+               className={`max-Wide-mobile-s:h-20 max-Wide-mobile-s:w-20 ${style1} max-Wide-mobile-s:rounded-lg h-32 mx-1 w-32 object-contain border-2 p-1 rounded-xl`}
+               src={Item.photo?.split(`${Ph2.f}`)[1]?.split(`${Ph2.t}`)[0] || ""}
+               alt="img"
+             />
+             <img
+               onClick={changePH2}
+               className={`max-Wide-mobile-s:h-20 max-Wide-mobile-s:w-20 ${style2} max-Wide-mobile-s:rounded-lg h-32 mx-1 w-32 object-contain border-2 p-1 rounded-xl`}
+               src={Item.photo?.split(`${Ph3.f}`)[1]?.split(`${Ph3.t}`)[0] || ""}
+               alt="img"
+             />
+             <img
+               onClick={changePH3}
+               className={`max-Wide-mobile-s:h-20 max-Wide-mobile-s:w-20 ${style3} max-Wide-mobile-s:rounded-lg h-32 mx-1 w-32 object-contain border-2 p-1 rounded-xl`}
+               src={Item.photo?.split(`${Ph4.f}`)[1]?.split(`${Ph4.t}`)[0] || ""}
+               alt="img"
+             />
+
+            </div>
+          </div>
+   
 
           <div className="flex flex-col w-full desktop-s:w-[74%] px-4 mt-4 desktop-s:mt-0">
             <div className="text font-extrabold text-4xl max-laptop-xl:text-3xl">

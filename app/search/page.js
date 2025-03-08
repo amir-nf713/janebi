@@ -50,7 +50,7 @@ function SearchComponent() {
                     <div key={index} className="flex justify-center mt-4 items-center">
                          <Items
                             key={index}
-                            img={item.photo}
+                            img={item.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
                             categori={item.categori}
                             onvan={item.onvan}
                             off={item.offer}

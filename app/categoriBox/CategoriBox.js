@@ -63,7 +63,7 @@ export default function CategoriBox(props) {
               categorii.map((Items, index) => ( 
                 <div key={index} className=""> 
                   {
-                    Items.categori === props.categori ? <Itemcategori id={Items._id} title={Items.onvan} img={Items.photo}></Itemcategori> : <></>
+                    Items.categori === props.categori ? <Itemcategori id={Items._id} title={Items.onvan} img={Items.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}></Itemcategori> : <></>
 
                   }
                 </div>

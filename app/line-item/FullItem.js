@@ -80,7 +80,7 @@ export default function FullItem() {
             allOffers.map((offer, index) => (
           <Items
             key={index}
-            img={offer.photo}
+            img={offer.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
             categori={offer.categori}
             onvan={offer.onvan}
             off={offer.offer}
@@ -100,7 +100,7 @@ export default function FullItem() {
            allNew.map((offer, index) => (
           <Items
             key={index}
-            img={offer.photo}
+            img={offer.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
             categori={offer.categori}
             onvan={offer.onvan}
             off={offer.offer}

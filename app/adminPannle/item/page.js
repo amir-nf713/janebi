@@ -92,7 +92,8 @@ export default function Page() {
                                     <div key={index} className="flex max-tablet-l:flex-col justify-between my-1 w-full">
                                         <div className="flex flex-col">
                                             <div className="flex max-mobile-xl:flex-col justify-center items-center">
-                                                <img className='size-52 ml-4' src={item.photo} alt="image" />
+                                            <img className='size-52 ml-4' src={item.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""} alt="image" />
+
                                                 <div className="flex flex-col">
                                                     <p className="text-4xl font-extrabold">{item.onvan}</p>
                                                     <p className="text-slate-500 text-2xl font-extrabold">{item.categori}</p>
