@@ -61,11 +61,7 @@ export default function Nav({ targetRef }) {
     }
   };
 
-  // const daf = () => {
-
-  // }
-
-  // window.onclick(daf)
+ 
 
 
 
@@ -122,7 +118,7 @@ export default function Nav({ targetRef }) {
           </span>
         </Link>
 
-        <p
+        <div
           onClick={scrollToSection}
           className="m-2 p-2 w-full max-Wide-mobile-l:text-xl flex-row flex justify-between items-center active:text-blue-800 hover:text-blue-800 cursor-pointer"
         >
@@ -136,7 +132,7 @@ export default function Nav({ targetRef }) {
           <span>
             <BiChevronLeft />
           </span>
-        </p>
+        </div>
 
         <Link
           href={"/aboutMe"}
@@ -194,14 +190,14 @@ export default function Nav({ targetRef }) {
           </span>
         </p>
 
-        <p className="flex flex-row-reverse justify-between items-center active:text-blue-800 hover:text-blue-800 cursor-pointer">
+        <div className="flex flex-row-reverse justify-between items-center active:text-blue-800 hover:text-blue-800 cursor-pointer">
           <Link href={"/aboutMe"} className="mr-2 font-dorna">
             درباره ما
           </Link>
           <span>
             <CiChat2 />
           </span>
-        </p>
+        </div>
 
         <Link
           href={"/traking"}

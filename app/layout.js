@@ -7,13 +7,24 @@ import { GrFavorite } from "react-icons/gr";
 import { AiOutlineShop } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-
+  import { Suspense } from "react";
+  import Loading from "./loding/Loding";
 
 export default function RootLayout({ children }) {
 
   const router = useRouter()
   const gg = () => {
     router.push("/bascket");
+  };
+
+
+  const ff = () => {
+    router.push(`/search?query=`);
+  };
+
+
+  const ll = () => {
+    router.push(`/favorit`);
   };
  
   const accontt = (e) => {
@@ -28,12 +39,16 @@ export default function RootLayout({ children }) {
   };
 
  
+
+
   
   return (
     <html lang="en">
       <body>
   
-        {children}
+    <Suspense fallback={<Loading />}>
+      {children}
+    </Suspense>
  
            <div className="bg-white hidden w-full max-Wide-mobile-4xl:flex sticky h-14 items-center justify-around text-2xl bottom-0">
                <div onClick={gg} className="">
@@ -44,12 +59,12 @@ export default function RootLayout({ children }) {
                   <FaRegUser/>
                </div>
 
-               <div className="">
+               <div onClick={ll} className="">
                   <GrFavorite />
                </div>
                
              
-               <div className="">
+               <div onClick={ff} className="">
                   <AiOutlineShop />
                </div>
                

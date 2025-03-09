@@ -15,8 +15,14 @@ import { BiBookmarkHeart } from "react-icons/bi";
 import { BsBasket2Fill } from "react-icons/bs";
 import Soshal from "../component/Home/soshal/soshal";
 import Footer from "../component/Home/footer/Footer";
+import { GrFavorite } from "react-icons/gr";
+import { MdOutlineFavorite } from "react-icons/md";
+
+
 
 function SearchComponen() {
+  
+  const [ico, setico] = useState(<GrFavorite />);
   const [selectedColor, setselectedColor] = useState("");
   const [selectedQuantity, setselectedQuantity] = useState(1);
   const [ee, setee] = useState("");
@@ -51,6 +57,12 @@ function SearchComponen() {
 
     router.push("/bascket")
   };
+
+
+
+  
+  
+  
 
   const contentRef = useRef(null); // استفاده از useRef برای دسترسی به دیو
 
@@ -256,8 +268,49 @@ const changePH3 = () => {
   setPh1(Ph4)
   setPh4(Ph1)
 }
+  function jf(params) {
 
 
+    
+    const Favorit = Cookies.get("favorit");
+      const favoriteItems = Favorit ? JSON.parse(Favorit) : [];
+      
+      favoriteItems.map((element) => {
+        if (element.id === Item._id) {
+          setico(<MdOutlineFavorite />); // Set the filled heart icon
+        } else {
+          setico(<GrFavorite />); // Set the outline heart icon
+        }
+      });
+
+
+
+
+  }
+
+
+const addTofavorit = (item) => {
+  let cart = Cookies.get("favorit");
+  cart = cart ? JSON.parse(cart) : [];
+
+  // Check if the item is already in the favorites list
+  const existingItemIndex = cart.findIndex((p) => p.id === item.id);
+
+  if (existingItemIndex !== -1) {
+    // Optionally update the item (e.g., increment quantity or other properties)
+    // Example: cart[existingItemIndex].quantity += 1;
+  } else {
+    // Add the item to the favorites list
+    cart.push(item);
+  }
+
+  // Save back to the cookie
+  Cookies.set("favorit", JSON.stringify(cart), { expires: 7 }); // Data persists for 7 days
+   jf()
+};
+
+
+  
 
   return (
     <div className="font-dorna flex flex-col justify-center items-center">
@@ -305,14 +358,16 @@ const changePH3 = () => {
             </div>
 
             <div className="flex flex-wrap justify-between items-center mt-5">
-              <div className="flex flex-row items-center">
+              <div className="flex ml-3 flex-row items-center">
                 <span className="text-lg desktop-s:text-2xl font-bold text-slate-600">
                   برند:
                 </span>
                 <span className="text-lg desktop-s:text-2xl font-bold text-sky-900">
                   {Item.berand}
                 </span>
+                  
               </div>
+             
 
               <div className="flex flex-row-reverse">
                 {[...Array(5)].map((_, index) => (
@@ -361,7 +416,23 @@ const changePH3 = () => {
               {Item.tozih[0]}
             </div>
 
+                <div
+                 onClick={() =>
+                  addTofavorit({
+                    id: Item._id,
+
+
+                  
+                  })
+                }
+                className="mt-9 w-full flex items-center justify-center text-3xl">
+                    {ico}
+                </div>
+
             <div className="flex flex-col laptop-xl:flex-row justify-between items-center mt-5">
+
+           
+
               <div className="text-sky-600 text-lg desktop-s:text-3xl font-extrabold">
                 <div className="flex flex-row items-center mt-3">
                   <PiKeyReturnLight className="text-2xl desktop-s:text-4xl ml-3" />
@@ -394,6 +465,7 @@ const changePH3 = () => {
                     ></div>
                   ))}
               </div>
+              
             </div>
           </div>
         </div>

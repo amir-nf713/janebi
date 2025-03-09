@@ -10,10 +10,30 @@ function SearchComponent() {
     const [searchQuery, setSearchQuery] = useState(""); 
     const searchParams = useSearchParams();
     const router = useRouter();
-    const query = searchParams.get("query");
+    
+    // مقدار اولیه query را `null` بگذاریم
+    const [query, setQuery] = useState(null);
 
     useEffect(() => {
-        if (!query) return;
+        // فقط در کلاینت مقدار query را از URL بگیر
+        setQuery(searchParams.get("query") || "");
+
+    }, [searchParams]);
+
+    useEffect(() => {
+        if (query === null) return;
+
+        if (query === "") {
+            axios.get(apiKey.getitem)
+                .then(response => {
+                    if (response.data.data) {
+                        setTagSearchResults(response.data.data); // اصلاح این بخش
+                    }
+                })
+                .catch(error => console.error("Error fetching data:", error));
+            return;
+        }
+
         setSearchQuery(query);
 
         axios.get(apiKey.getitem)
@@ -34,7 +54,7 @@ function SearchComponent() {
     };
 
     return (
-        <div className="p-4 h-[90vh] w-full">
+        <div className="p-4 h-[79.6vh] w-full">
             <div className="flex justify-center">
                 <input
                     type="text"
@@ -45,82 +65,22 @@ function SearchComponent() {
                 />
             </div>
 
-            <div className="w-full mt-6 overflow-y-auto max-Wide-mobile-s:justify-evenly flex flex-row justify-center flex-wrap">
+            <div className="w-full h-[98%] mt-3 overflow-y-auto max-Wide-mobile-s:justify-evenly flex flex-row justify-center flex-wrap">
                 {tagSearchResults.map((item, index) => (
-                    <div key={index} className="flex flex-wrap justify-center items-center">
-                         <ItemSerrc
-                            key={index}
-                            img={item.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
-                            categori={item.categori}
-                            onvan={item.onvan}
-                            off={item.offer}
-                            money={item.money}
-                            id={item._id}
-                          />
-                     
-                         <ItemSerrc
-                            key={index}
-                            img={item.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
-                            categori={item.categori}
-                            onvan={item.onvan}
-                            off={item.offer}
-                            money={item.money}
-                            id={item._id}
-                          />
-                     
-                         <ItemSerrc
-                            key={index}
-                            img={item.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
-                            categori={item.categori}
-                            onvan={item.onvan}
-                            off={item.offer}
-                            money={item.money}
-                            id={item._id}
-                          />
-                     
-                         <ItemSerrc
-                            key={index}
-                            img={item.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
-                            categori={item.categori}
-                            onvan={item.onvan}
-                            off={item.offer}
-                            money={item.money}
-                            id={item._id}
-                          />
-                     
-                         <ItemSerrc
-                            key={index}
-                            img={item.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
-                            categori={item.categori}
-                            onvan={item.onvan}
-                            off={item.offer}
-                            money={item.money}
-                            id={item._id}
-                          />
-                     
-                         <ItemSerrc
-                            key={index}
-                            img={item.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
-                            categori={item.categori}
-                            onvan={item.onvan}
-                            off={item.offer}
-                            money={item.money}
-                            id={item._id}
-                          />
-                     
-                    
-                    </div>
+                    <ItemSerrc
+                        key={index}
+                        img={item.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
+                        categori={item.categori}
+                        onvan={item.onvan}
+                        off={item.offer}
+                        money={item.money}
+                        id={item._id}
+                    />
                 ))}
             </div>
         </div>
     );
 }
 
-// ⬇️ اینجا `<Suspense>` اضافه شده
-export default function Page() {
-    return (
-        <Suspense fallback={<div>در حال بارگذاری...</div>}>
-            <SearchComponent />
-        </Suspense>
-    );
-}
+// ⬇️ اینجا `<Suspense>` دیگر لازم نیست
+export default SearchComponent;
