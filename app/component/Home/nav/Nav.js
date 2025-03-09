@@ -17,6 +17,16 @@ import Cookies from "js-cookie";
 import { useRef } from "react";
 import { MdOutlineFilterListOff } from "react-icons/md";
 import SearchInput from "../main/searchInput";
+import { FaRegUser } from "react-icons/fa6";
+import { SlBasket } from "react-icons/sl";
+import { CiShoppingBasket } from "react-icons/ci";
+import { CiChat2 } from "react-icons/ci";
+import { CiBoxList } from "react-icons/ci";
+import { IoHomeOutline } from "react-icons/io5";
+import { BiChevronLeft } from "react-icons/bi";
+import { IoMdClose } from "react-icons/io";
+import { GrBasket } from "react-icons/gr";
+
 
 
 export default function Nav({ targetRef }) {
@@ -44,90 +54,133 @@ export default function Nav({ targetRef }) {
 
   const [w, stw] = useState("-right-96");
   const hh = () => {
-        if (w === "-right-96") {
-          stw("right-0")
-        } else {
-          stw("-right-96")
-        }
-  }
+    if (w === "-right-96") {
+      stw("right-0");
+    } else {
+      stw("-right-96");
+    }
+  };
+
+  // const daf = () => {
+
+  // }
+
+  // window.onclick(daf)
+
+
 
   return (
     <nav className="h-28 max-tablet-xl:h-20 max-Wide-mobile-l:h-14 w-full flex flex-row-reverse items-center justify-between">
       <div className="flex flex-row-reverse items-center justify-between">
         <div
           onClick={gg}
-          className="mr-2 max-Wide-mobile-l:mr-1 max-tablet-xl:mr-1 ml-11 text-4xl max-tablet-xl:text-xl p-3  max-tablet-xl:ml-3 max-Wide-mobile-l:text-xl cursor-pointer max-Wide-mobile-l:border-none  "
+          className="mr-2 max-Wide-mobile-4xl:hidden max-Wide-mobile-l:mr-1 max-tablet-xl:mr-1 ml-11 text-4xl max-tablet-xl:text-xl p-3 max-tablet-xl:ml-3 max-Wide-mobile-l:text-xl cursor-pointer max-Wide-mobile-l:border-none  "
         >
-          <BsCartFill />
+          <GrBasket />
         </div>
 
         <div
           onClick={accontt}
-          className="flex cursor-pointer max-Wide-mobile-l:bg-white/0 flex-row justify-evenly p-2 items-center h-16 w-20 max-Wide-mobile-l:w-10 max-Wide-mobile-l:h-8  max-tablet-xl:h-10 max-tablet-xl:w-11 text-white max-Wide-mobile-l:text-black rounded-full"
+          className="flex max-Wide-mobile-4xl:hidden cursor-pointer max-Wide-mobile-l:bg-white/0 flex-row justify-evenly p-2 items-center h-16 w-20 max-Wide-mobile-l:w-10 max-Wide-mobile-l:h-8  max-tablet-xl:h-10 max-tablet-xl:w-11 text-white max-Wide-mobile-l:text-black rounded-full"
         >
-          
           <span className="text-4xl text-black max-tablet-xl:text-xl max-Wide-mobile-l:text-lg">
-            <FaUser />
+            <FaRegUser />
           </span>
         </div>
         <SearchInput></SearchInput>
       </div>
 
-      <img className="h-full w-auto bg-transparent" src="/Frame_395-removebg-preview.png" alt="" />
+      <img
+        className="h-full w-auto bg-transparent"
+        src="/Frame_395-removebg-preview.png"
+        alt="logo"
+      />
 
       <div
-        className={`absolute bg-white h-[100vh] text-3xl w-60 z-40 ${w} transition-all items-center justify-start top-0 max-desktop-xl:flex flex-col hidden z-[100]`}
+        
+        className={`absolute bg-neutral-100 z-[99999] h-[100vh] text-3xl w-60  ${w} transition-all items-center justify-start top-0 max-desktop-xl:flex flex-col hidden z-[100]`}
       >
-        <button onClick={hh} className="w-full flex items-center p-3 justify-end text-4xl border-b-2 border-e-slate-700"><MdOutlineFilterListOff /></button>
+        <button
+          onClick={hh}
+          className="w-full flex items-center p-3 text-2xl border-b-2 border-e-slate-700"
+        >
+          <IoMdClose />
+        </button>
         <Link
           href={"/"}
-          className="m-2 p-2 flex w-full max-Wide-mobile-l:text-xl  border-b-2 border-neutral-500 flex-row justify-between items-center active:text-blue-800 hover:text-blue-800 cursor-pointer"
+          className="m-2 p-2 flex w-full max-Wide-mobile-l:text-xl flex-row justify-between items-center active:text-blue-800 hover:text-blue-800 cursor-pointer"
         >
-          <span className="mr-2  font-dorna">خانه</span>
+          <div className="flex flex-row-reverse justify-center items-center">
+            <span className="mr-2  font-dorna">خانه</span>
+            <span>
+              <IoHomeOutline />
+            </span>
+          </div>
+
           <span>
-            <IoHome />
+            <BiChevronLeft />
           </span>
         </Link>
 
         <p
           onClick={scrollToSection}
-          className="m-2 p-2 w-full max-Wide-mobile-l:text-xl border-b-2 border-neutral-500 flex-row flex  justify-between items-center active:text-blue-800 hover:text-blue-800 cursor-pointer"
+          className="m-2 p-2 w-full max-Wide-mobile-l:text-xl flex-row flex justify-between items-center active:text-blue-800 hover:text-blue-800 cursor-pointer"
         >
-          <span className="mr-2 font-dorna">دسته بندی</span>
-          <span>
-            <AiFillDatabase />
-          </span>
-        </p>
+          <div className="flex flex-row-reverse justify-center items-center">
+            <span className="mr-2 font-dorna">دسته بندی</span>
+            <span>
+              <CiBoxList />
+            </span>
+          </div>
 
-        <p className="m-2 p-2 max-Wide-mobile-l:text-xl flex w-full  border-b-2 border-neutral-500 flex-row justify-between items-center active:text-blue-800 hover:text-blue-800 cursor-pointer">
-          <Link href={"/aboutMe"} className="mr-2 flex-row flex justify-between w-full items-center font-dorna">
-            درباره ما
-          
           <span>
-            <AiFillMessage />
+            <BiChevronLeft />
           </span>
-          </Link>
         </p>
 
         <Link
-          href={"/traking"}
-          className="m-2 p-2 flex w-full  border-b-2 border-neutral-500 flex-row justify-between max-Wide-mobile-l:text-xl items-center active:text-blue-800 hover:text-blue-800 cursor-pointer"
+          href={"/aboutMe"}
+          className="m-2 p-2 max-Wide-mobile-l:text-xl flex w-full flex-row justify-between items-center active:text-blue-800 hover:text-blue-800 cursor-pointer"
         >
-          <span className="font-dorna mr-2">پیگیری سفارش</span>
+         
+
+          <div className="flex flex-row-reverse justify-center items-center">
+            <span className="font-dorna mr-2">درباره ما</span>
+            <span>
+            <CiChat2 />
+            </span>
+          </div>
+
           <span>
-            <AiFillAlert />
+            <BiChevronLeft />
+          </span>
+        </Link>
+
+        <Link
+          href={"/traking"}
+          className="m-2 p-2 flex w-full  flex-row justify-between max-Wide-mobile-l:text-xl items-center active:text-blue-800 hover:text-blue-800 cursor-pointer"
+        >
+          <div className="flex flex-row-reverse justify-center items-center">
+            <span className="font-dorna mr-2">پیگیری سفارش</span>
+            <span>
+              <CiShoppingBasket />
+            </span>
+          </div>
+
+          <span>
+            <BiChevronLeft />
           </span>
         </Link>
       </div>
 
-      <div className="flex text-3xl w-[40%] mr-11 flex-row items-center justify-between max-desktop-xl:hidden">
+      <div className="flex text-2xl w-[33%] mr-11 flex-row items-center justify-between max-desktop-xl:hidden">
         <Link
           href={"/"}
           className="flex flex-row-reverse justify-between items-center active:text-blue-800 hover:text-blue-800 cursor-pointer"
         >
           <span className="mr-2 font-dorna">خانه</span>
           <span>
-            <IoHome />
+            <IoHomeOutline />
           </span>
         </Link>
 
@@ -137,7 +190,7 @@ export default function Nav({ targetRef }) {
         >
           <span className="mr-2 font-dorna">دسته بندی</span>
           <span>
-            <AiFillDatabase />
+            <CiBoxList />
           </span>
         </p>
 
@@ -146,7 +199,7 @@ export default function Nav({ targetRef }) {
             درباره ما
           </Link>
           <span>
-            <AiFillMessage />
+            <CiChat2 />
           </span>
         </p>
 
@@ -156,7 +209,7 @@ export default function Nav({ targetRef }) {
         >
           <span className="font-dorna mr-2">پیگیری سفارش</span>
           <span>
-            <AiFillAlert />
+            <CiShoppingBasket />
           </span>
         </Link>
       </div>

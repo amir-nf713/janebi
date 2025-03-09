@@ -3,7 +3,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 import React, { useEffect, useState, Suspense } from 'react';
 import apiKey from '../API';
-import Items from '../line-item/Item';
+import ItemSerrc from '../Itemserach/ItemSearch';
 
 function SearchComponent() {
     const [tagSearchResults, setTagSearchResults] = useState([]);
@@ -34,8 +34,8 @@ function SearchComponent() {
     };
 
     return (
-        <div className="p-4">
-            <div className="flex justify-center mb-6">
+        <div className="p-4 h-[90vh] w-full">
+            <div className="flex justify-center">
                 <input
                     type="text"
                     value={searchQuery}
@@ -45,10 +45,10 @@ function SearchComponent() {
                 />
             </div>
 
-            <div className="w-full flex flex-row justify-center flex-wrap">
+            <div className="w-full mt-6 overflow-y-auto max-Wide-mobile-s:justify-evenly flex flex-row justify-center flex-wrap">
                 {tagSearchResults.map((item, index) => (
-                    <div key={index} className="flex justify-center mt-4 items-center">
-                         <Items
+                    <div key={index} className="flex flex-wrap justify-center items-center">
+                         <ItemSerrc
                             key={index}
                             img={item.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
                             categori={item.categori}
@@ -57,6 +57,58 @@ function SearchComponent() {
                             money={item.money}
                             id={item._id}
                           />
+                     
+                         <ItemSerrc
+                            key={index}
+                            img={item.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
+                            categori={item.categori}
+                            onvan={item.onvan}
+                            off={item.offer}
+                            money={item.money}
+                            id={item._id}
+                          />
+                     
+                         <ItemSerrc
+                            key={index}
+                            img={item.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
+                            categori={item.categori}
+                            onvan={item.onvan}
+                            off={item.offer}
+                            money={item.money}
+                            id={item._id}
+                          />
+                     
+                         <ItemSerrc
+                            key={index}
+                            img={item.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
+                            categori={item.categori}
+                            onvan={item.onvan}
+                            off={item.offer}
+                            money={item.money}
+                            id={item._id}
+                          />
+                     
+                         <ItemSerrc
+                            key={index}
+                            img={item.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
+                            categori={item.categori}
+                            onvan={item.onvan}
+                            off={item.offer}
+                            money={item.money}
+                            id={item._id}
+                          />
+                     
+                         <ItemSerrc
+                            key={index}
+                            img={item.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
+                            categori={item.categori}
+                            onvan={item.onvan}
+                            off={item.offer}
+                            money={item.money}
+                            id={item._id}
+                          />
+                     
+                    
                     </div>
                 ))}
             </div>

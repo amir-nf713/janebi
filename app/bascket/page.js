@@ -60,13 +60,17 @@ export default function Page() {
     setTotalMoney(total);
 
     // Fetch post money (assuming it's a fixed value or fetched from an API)
-    axios.get(apiKey.Web)
-      .then(data => {
-        const dataWeb = data.data.data[0];
-        setPostMoney(dataWeb.postMoney);
-      })
-      .catch(error => console.error("Error fetching post money:", error));
+ 
   }, [cartItems, productDetails]);
+
+  
+  axios.get(apiKey.Web)
+  .then(data => {
+    const dataWeb = data.data.data[0];
+    setPostMoney(dataWeb.postMoney);
+  })
+  .catch(error => console.error("Error fetching post money:", error));
+
 
   // Update cart in cookies and state
   const updateCart = useCallback((updatedCart) => {
@@ -122,7 +126,7 @@ export default function Page() {
             <div key={index} className="border p-4 mb-4 max-laptop-l:flex-col flex items-center w-full justify-around border-sky-400">
               <div className="max-Wide-mobile-s:mb-3 max-laptop-l:w-full max-laptop-l:justify-start flex flex-row items-center justify-between">
                 <img src={product.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""} alt="img" className="w-20 h-20 object-cover" />
-                <div className="max-laptop-l:mr-3 max-laptop-l:text-2xl font-bold w-[25%] max-desktop-l:text-lg">{product.onvan}</div>
+                <div className="max-laptop-l:mr-3 max-laptop-l:text-2xl font-bold w-[100%] max-desktop-l:text-lg">{product.onvan}</div>
               </div>
               <div className="flex-wrap flex w-[50%] max-laptop-l:w-full flex-row justify-around items-center">
                 <div className="mx-3 text-sm w-[10%] text-gray-500">{cartItem.model}</div>

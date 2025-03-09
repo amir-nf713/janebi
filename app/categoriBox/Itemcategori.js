@@ -9,8 +9,8 @@ export default function Itemcategori(props) {
   }
   return (
     <div onClick={toShop} className='border border-neutral-400 flex object-cover flex-col max-Wide-mobile-4xl:max-w-36 max-Wide-mobile-4xl:max-h-48 max-Wide-mobile-4xl:min-w-36 max-Wide-mobile-4xl:min-h-48 font-dorna font-bold bg-white min-h-80 min-w-60 max-h-80 max-w-60 rounded-2xl justify-center items-center max-Wide-mobile-4xl:mx-1 mx-4 cursor-pointer'>
-      <img className='h-[79%] w-[95%] object-cover rounded-xl' src={props.img} alt="img" />
-      <p className="text-xl text-black text-center max-Wide-mobile-4xl:text-sm my-3 mx-2">{props.title}</p>
+      <img className='h-auto rounded-3xl w-auto object-cover' src={props.img} alt="img" />
+      <p className="text-xl text-black text-center max-Wide-mobile-4xl:text-xs my-1 mx-2">{props.title}</p>
     </div>
   )
 }

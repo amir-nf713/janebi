@@ -30,7 +30,7 @@ export default function Footer() {
     
   }, []); // وابستگی به `id`
   return (
-    <footer className="h-[760px] bg-[#d2d2d2] flex flex-col">
+    <footer className="h-[760px] bg-[#d2d2d2] flex pb-4 flex-col">
     <div className="flex h-1/2 max-tablet-l:flex-wrap max-tablet-l:justify-center items-center flex-row border-b-4 border-slate-900 justify-between">
       <div className="flex mr-28 max-tablet-l:mr-0 max-laptop-xl:mr-8 h-1/2 flex-row-reverse justify-between font-dorna max-Wide-mobile-l:w-[350px] max-laptop-xl:w-[400px] w-[600px]">
         <div className="flex items-start flex-col h-[80%]">
@@ -156,7 +156,7 @@ export default function Footer() {
           
         </div>
         <div className=" text-3xl max-mobile-l:text-xs max-Wide-mobile-l:text-base max-laptop-xl:text-2xl flex flex-col items-end font-dorna font-semibold ">
-          <p className="mt-6">شماره : 09140173808</p>
+          <p className="mt-6">شماره : 09966820923</p>
           <p className="mt-6">ساعت کاری و جوابدهی 8 صبح تا 11 شب</p>
         </div>
       </div>

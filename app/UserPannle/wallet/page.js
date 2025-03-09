@@ -10,6 +10,8 @@ const Wallet = () => {
   const [error, setError] = useState(""); // پیام خطا
   const [giftMessage, setGiftMessage] = useState(""); // پیام مربوط به کد هدیه
 
+  
+
   // تابع برای ثبت کد هدیه
   const handleGiftCode = () => {
     if (giftCode === "HAPPY2023") {

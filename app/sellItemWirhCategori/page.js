@@ -9,6 +9,14 @@ import { TbFilterOff } from "react-icons/tb";
 import { useRouter } from "next/navigation";
 import { TbCategoryPlus } from "react-icons/tb";
 import { TbXboxX } from "react-icons/tb";
+import { BiArrowToLeft } from "react-icons/bi";
+import { BsList } from "react-icons/bs";
+import { BsXLg } from "react-icons/bs";
+import { IoMdClose } from "react-icons/io";
+
+
+
+
 
 function SearchCompone() {
   const router = useRouter();
@@ -87,7 +95,7 @@ function SearchCompone() {
           onClick={clickhanler}
           className="p-4 hidden max-laptop-xl:flex text-3xl w-full items-center flex-row-reverse justify-start "
         >
-          <span className="font-black text-xl mx-1">بستن</span><TbXboxX />
+          <span className="font-black text-xl mx-1">بستن</span><IoMdClose />
         </button>
         <h1 className="p-6 text-2xl font-extrabold w-full border-b-2 border-sky-500">
           فیلتر بر اساس مدل
@@ -124,7 +132,7 @@ function SearchCompone() {
                     onClick={(e) => e.stopPropagation()} // جلوگیری از اجرای onClick والد هنگام کلیک روی checkbox
                   />
                 </div>
-                <div className="text-xl">{">"}</div>
+                <div className="text-xl"><BiArrowToLeft /></div>
               
                </div>
               </div>
@@ -137,9 +145,9 @@ function SearchCompone() {
       <div className="w-[70%] max-laptop-xl:w-full overflow-y-auto bg-white shadow-lg h-[95vh] p-5">
         <button
           onClick={clickhanler}
-          className="max-laptop-xl:flex hidden text-sky-500 text-4xl justify-end flex-row-reverse items-center  w-full justif items mb-3"
+          className="max-laptop-xl:flex hidden text-sky-700 text-4xl justify-end flex-row-reverse items-center  w-full justif items mb-3"
         >
-          <span className="text-2xl font-black mx-2">فیلتر ها</span><TbCategoryPlus />
+          <span className="text-lg font-black mx-2">مشاهده فیلتر ها</span><BsList />
         </button>
         <div className="max-Wide-mobile-s:flex max-Wide-mobile-s:flex-wrap max-Wide-mobile-s:gap-2  max-Wide-mobile-s:flex-row max-Wide-mobile-s:justify-end ">
           {Categori.filter(
@@ -150,12 +158,12 @@ function SearchCompone() {
             <div
               onClick={() => jh(item._id)}
               key={index}
-              className="p-4 max-Wide-mobile-s:mt-2 max-Wide-mobile-s:w-[48%] max-Wide-mobile-s:border-2 max-Wide-mobile-s:border-neutral-300 max-Wide-mobile-s:flex-col max-Wide-mobile-s:items-center max-Wide-mobile-s:justify-center border-b flex flex-row border-gray-300"
+              className="p-4 max-Wide-mobile-s:border-none max-Wide-mobile-s:mt-2 max-Wide-mobile-s:w-[48%] max-Wide-mobile-s:border-2 max-Wide-mobile-s:border-neutral-300 max-Wide-mobile-s:flex-col max-Wide-mobile-s:items-center max-Wide-mobile-s:justify-center border-b flex flex-row border-gray-300"
             >
               <img
-                src={item.photo}
+                src={item.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
                 alt="img"
-                className="max-Wide-mobile-s:w-[98%] max-Wide-mobile-s:h-[80%] size-60 max-Wide-mobile-3xl:size-36 max-Wide-mobile-s:size-52 object-cover"
+                className="max-Wide-mobile-s:w-[98%] max-Wide-mobile-s:h-[80%] size-60 max-Wide-mobile-s:rounded-3xl max-Wide-mobile-3xl:size-36 max-Wide-mobile-s:size-52 object-cover"
               />
               <div className="flex max-Wide-mobile-s:justify-center max-Wide-mobile-s:items-center flex-col w-full mr-2 max-Wide-mobile-s:mr-0">
                 <div className="max-Wide-mobile-s:text-xs max-Wide-mobile-s:w-full max-Wide-mobile-s:flex max-Wide-mobile-s:items-center max-Wide-mobile-s:justify-center max-Wide-mobile-s:m-0 max-Wide-mobile-s:my-3 text-3xl max-Wide-mobile-3xl:text-xl text-black font-extrabold mb-2">
@@ -164,10 +172,10 @@ function SearchCompone() {
                 <div className="text-2xl max-Wide-mobile-s:hidden mb-1 max-Wide-mobile-3xl:text-lg font-bold text-neutral-400">
                   {item.categori}
                 </div>
-                <div className="h-[2px] bg-slate-300 w-11/12"></div>
+                <div className="h-[2px] max-Wide-mobile-s:hidden bg-slate-300 w-11/12"></div>
 
                 {item.offer > 0 ? (
-                  <div className="flex max-Wide-mobile-s:items-center max-Wide-mobile-s:mt-3 flex-row max-Wide-mobile-3xl:flex-col text-2xl font-extrabold text-neutral-700">
+                  <div className="flex max-Wide-mobile-s:mt-1 max-Wide-mobile-s:items-center flex-row max-Wide-mobile-3xl:flex-col text-2xl font-extrabold text-neutral-700">
                     <div className="max-Wide-mobile-s:hidden line-through max-Wide-mobile-s:text-sm  max-Wide-mobile-s:text-neutral-400">
                       {item.money.toLocaleString()}
                       <span className="text-xl mx-1 max-Wide-mobile-s:text-sm">

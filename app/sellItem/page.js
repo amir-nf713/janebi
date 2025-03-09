@@ -265,7 +265,7 @@ const changePH3 = () => {
       <div className="w-full h-1 bg-slate-500 my-2"></div>
 
       <div className="mt-16 w-full flex flex-col items-center">
-        <div className="flex flex-col desktop-s:flex-row items-center desktop-s:items-start">
+        <div className="flex flex-col justify-center desktop-s:flex-row items-center desktop-s:items-start">
           <div className="flex flex-col justify-center items-center">
             <div className="">
              <img
@@ -278,19 +278,19 @@ const changePH3 = () => {
             <div className="flex flex-row">
              <img
                onClick={changePH1}
-               className={`max-Wide-mobile-s:h-20 max-Wide-mobile-s:w-20 ${style1} max-Wide-mobile-s:rounded-lg h-32 mx-1 w-32 object-contain border-2 p-1 rounded-xl`}
+               className={`max-Wide-mobile-s:h-20 max-Wide-mobile-s:w-20 rounded-3xl ${style1} max-Wide-mobile-s:rounded-lg h-32 mx-1 w-32 object-contain border-2 p-1`}
                src={Item.photo?.split(`${Ph2.f}`)[1]?.split(`${Ph2.t}`)[0] || ""}
                alt="img"
              />
              <img
                onClick={changePH2}
-               className={`max-Wide-mobile-s:h-20 max-Wide-mobile-s:w-20 ${style2} max-Wide-mobile-s:rounded-lg h-32 mx-1 w-32 object-contain border-2 p-1 rounded-xl`}
+               className={`max-Wide-mobile-s:h-20 max-Wide-mobile-s:w-20 rounded-3xl ${style2} max-Wide-mobile-s:rounded-lg h-32 mx-1 w-32 object-contain border-2 p-1`}
                src={Item.photo?.split(`${Ph3.f}`)[1]?.split(`${Ph3.t}`)[0] || ""}
                alt="img"
              />
              <img
                onClick={changePH3}
-               className={`max-Wide-mobile-s:h-20 max-Wide-mobile-s:w-20 ${style3} max-Wide-mobile-s:rounded-lg h-32 mx-1 w-32 object-contain border-2 p-1 rounded-xl`}
+               className={`max-Wide-mobile-s:h-20 max-Wide-mobile-s:w-20 rounded-3xl ${style3} max-Wide-mobile-s:rounded-lg h-32 mx-1 w-32 object-contain border-2 p-1`}
                src={Item.photo?.split(`${Ph4.f}`)[1]?.split(`${Ph4.t}`)[0] || ""}
                alt="img"
              />
@@ -300,7 +300,7 @@ const changePH3 = () => {
    
 
           <div className="flex flex-col w-full desktop-s:w-[74%] px-4 mt-4 desktop-s:mt-0">
-            <div className="text font-extrabold text-4xl max-laptop-xl:text-3xl">
+            <div className="text font-extrabold text-4xl max-laptop-xl:text-3xl max-Wide-mobile-xl:text-xl">
               {Item.onvan}
             </div>
 
@@ -416,7 +416,7 @@ const changePH3 = () => {
       </div>
 
       <div className="mt-14 w-[94%]">
-        <div className="font-extrabold text-3xl desktop-s:text-4xl border-b-4 border-sky-600 mb-6">
+        <div className="pb-2 font-extrabold text-3xl desktop-s:text-4xl border-b-4 border-sky-600 mb-6">
           مشخصات
         </div>
         <div className="grid grid-cols-1 laptop-xl:grid-cols-2 gap-4">
@@ -425,7 +425,7 @@ const changePH3 = () => {
               key={index}
               className="bg-gray-50 shadow-xl rounded-lg flex justify-between p-4 border"
             >
-              <div className="font-bold text-lg text-blue-600">
+              <div className="font-bold text-lg text-sky-500">
                 {item.title}
               </div>
               <div className="text-gray-700">{item.description}</div>
@@ -435,7 +435,7 @@ const changePH3 = () => {
       </div>
 
       <div className="mt-32 w-[90%]">
-        <div className="font-extrabold text-3xl desktop-s:text-4xl border-b-4 border-sky-600 mb-6">
+        <div className="font-extrabold text-3xl desktop-s:text-4xl border-b-4 pb-2 border-sky-600 mb-6">
           ثبت نظر
         </div>
         <div className="w-full flex flex-col items-center">

@@ -7,31 +7,33 @@ import { useState } from 'react';
 export default function ContactForm() {
     const [formData, setFormData] = useState({
         telegram: '',
-        whatsapp: '',
+        wahtsapp: '',
         instagram: '',
-        amount: 0,
-        post: 0
+        amount: "",
+        post: ""
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name === 'amount' && isNaN(value)) return; // مقدار پول فقط عدد بگیرد
+        if ((name === 'amount' || name === 'post') && isNaN(value)) return;
         setFormData({ ...formData, [name]: value });
     };
 
-    const router = useRouter()
+    const router = useRouter();
 
     const sub = () => {
-        axios.put(apiKey.Web,{
-            instagram : formData.instagram,
-            telegram : formData.telegram,
-            wahtsapp : formData.wahtsapp,
-            monyDavat : formData.amount,
-            postMoney : formData.post,
-        }).then(data => {
-             router.push("/adminPannle")
+        axios.put(apiKey.Web, {
+            instagram: formData.instagram,
+            telegram: formData.telegram,
+            wahtsapp: formData.wahtsapp,
+            moneyDavat: formData.amount,
+            postMoney: formData.post,
         })
-    }
+        .then(() => {
+            router.push("/adminPannle");
+        })
+        .catch(error => console.error("Error updating data:", error));
+    };
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-5 bg-gray-100">
@@ -47,8 +49,8 @@ export default function ContactForm() {
                 />
                 <input 
                     type="text" 
-                    name="whatsapp" 
-                    value={formData.whatsapp} 
+                    name="wahtsapp" 
+                    value={formData.wahtsapp} 
                     onChange={handleChange} 
                     placeholder="واتساپ"
                     className="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
