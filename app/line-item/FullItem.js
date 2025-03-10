@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 
 
 // بارگذاری کامپوننت BoxOffersDay بدون استفاده از ssr: false
-const Items = dynamic(() => import("../line-item/Item"), {});
+const Itemserach = dynamic(() => import("../Itemserach/ItemSearch"), {});
 
 import React, { useState, useEffect } from "react";
 import apiKey from '../API';
@@ -78,7 +78,7 @@ export default function FullItem() {
         <div className="flex flex-row ">
         <LineItem item={
             allOffers.map((offer, index) => (
-          <Items
+          <Itemserach
             key={index}
             img={offer.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
             categori={offer.categori}
@@ -98,7 +98,7 @@ export default function FullItem() {
         <div className="flex flex-row">
         <LineItem item={
            allNew.map((offer, index) => (
-          <Items
+          <Itemserach
             key={index}
             img={offer.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
             categori={offer.categori}

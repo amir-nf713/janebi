@@ -14,7 +14,7 @@ export default function ItemSerrc(props) {
       onClick={gotoCategiri}
       className="max-mobile-l:min-w-24 Wide-mobile-4xl:my-5 max-Wide-mobile-s:border-none max-mobile-l:max-w-24 max-mobile-l:min-h-20 max-mobile-l:max-h-20 mx-2 max-Wide-mobile-4xl:min-w-48 max-Wide-mobile-4xl:min-h-36 max-laptop-xl:min-w-64 max-laptop-xl:min-h-56 max-Wide-mobile-s:min-w-32 max-Wide-mobile-s:max-w-32 max-Wide-mobile-s:min-h-64 max-Wide-mobile-s:max-h-64  min-w-[423px]  min-h-[570px] bg-white flex flex-col justify-evenly font-dorna max-mobile-l:border-none border-2 border-black"
     >
-      <div className="border-b-2 max-mobile-l:border-none border-black flex justify-center items-center max-Wide-mobile-4xl:max-h-64 max-Wide-mobile-4xl:min-h-64 max-h-[500px] min-h-64 flex-col">
+      <div className="border-b-2 max-Wide-mobile-4xl:border-b-0  border-black flex justify-center items-center max-Wide-mobile-4xl:max-h-64 max-Wide-mobile-4xl:min-h-64 max-h-[500px] min-h-64 flex-col">
         <img
           src={props.img}
           alt="img"
@@ -31,7 +31,7 @@ export default function ItemSerrc(props) {
           {/* onvan */}
         </div>
       </div>
-      <div className="flex max-Wide-mobile-s: max-mobile-l:justify-center max-mobile-l:items-center max-Wide-mobile-4xl:min-h-16 max-Wide-mobile-4xl:max-h-16 max-mobile-l:min-h-0 max-mobile-l:max-h-0 flex-row-reverse justify-between items-center max-Wide-mobile-s:justify-center max-Wide-mobile-s:items-center max-Wide-mobile-s:flex max-Wide-mobile-s:m-0 max-Wide-mobile-s:-mt-14">
+      <div className="flex  max-Wide-mobile-s: max-mobile-l:justify-center max-mobile-l:items-center max-Wide-mobile-4xl:min-h-16 max-Wide-mobile-4xl:max-h-16 max-mobile-l:min-h-0 max-mobile-l:max-h-0 flex-row-reverse justify-between items-center max-Wide-mobile-s:justify-center max-Wide-mobile-s:items-center max-Wide-mobile-s:flex max-Wide-mobile-s:m-0 max-Wide-mobile-s:-mt-14">
         <div className="max-Wide-mobile-s:hidden max-mobile-l:hidden ">
           <div className="text-5xl max-laptop-xl:text-3xl ml-5 max-Wide-mobile-l:active:text-3xl active:text-6xl transition-all max-Wide-mobile-l:text-2xl">
             <button>
