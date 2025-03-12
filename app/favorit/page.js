@@ -52,7 +52,7 @@ const FavoritesPage = () => {
   return (
     <div className='h-[100vh]'>
         <div  className="w-full flex flex-row justify-end p-2 text-2xl font-extrabold text-sky-700 items-center">
-          <button  className="w-16 flex items-center justify-center" onClick={() => router.back()}><GoArrowLeft /></button>
+          <button  className="w-16 flex items-center justify-center" onClick={() => router.push("/")}><GoArrowLeft /></button>
         </div>
       <h1>علاقه‌مندی‌های شما</h1>
       {products.length > 0 ? (
