@@ -18,7 +18,7 @@ export default function ItemSerrc(props) {
         <img
           src={props.img}
           alt="img"
-          className="w-[97%] max-Wide-mobile-s:h-[120px] max-mobile-l:rounded-xl max-mobile-l:h-24 h-[350px] max-Wide-mobile-4xl:h-40 max-laptop-xl:h-52"
+          className="w-[97%] max-Wide-mobile-s:h-[120px] max-mobile-l:rounded-xl max-mobile-l:h-24 h-[350px] rounded-2xl mb-2 max-Wide-mobile-4xl:h-40 max-laptop-xl:h-52"
         ></img>
         <div className="max-mobile-l:justify-center max-mobile-l:mt-1 max-mobile-l:items-center max-Wide-mobile-s:my-0 max-mobile-l:mr-0  w-full flex items-start flex-col mr-4 my-3 max-mobile-l:-my-2">
           <p className="max-mobile-l:hidden max-Wide-mobile-s:hidden  font-extrabold text-2xl text-slate-500 max-laptop-xl:text-xl max-Wide-mobile-l:text-sm ">
@@ -31,7 +31,7 @@ export default function ItemSerrc(props) {
           {/* onvan */}
         </div>
       </div>
-      <div className="flex  max-Wide-mobile-s: max-mobile-l:justify-center max-mobile-l:items-center max-Wide-mobile-4xl:min-h-16 max-Wide-mobile-4xl:max-h-16 max-mobile-l:min-h-0 max-mobile-l:max-h-0 flex-row-reverse justify-between items-center max-Wide-mobile-s:justify-center max-Wide-mobile-s:items-center max-Wide-mobile-s:flex max-Wide-mobile-s:m-0 max-Wide-mobile-s:-mt-14">
+      <div className="flex   max-Wide-mobile-s: max-mobile-l:justify-center max-mobile-l:items-center max-Wide-mobile-4xl:min-h-16 max-Wide-mobile-4xl:max-h-16 max-mobile-l:min-h-0 max-mobile-l:max-h-0 flex-row-reverse justify-between items-center max-Wide-mobile-s:justify-center max-Wide-mobile-s:items-center max-Wide-mobile-s:flex max-Wide-mobile-s:m-0 max-Wide-mobile-s:-mt-14">
         <div className="max-Wide-mobile-s:hidden max-mobile-l:hidden ">
           <div className="text-5xl max-laptop-xl:text-3xl ml-5 max-Wide-mobile-l:active:text-3xl active:text-6xl transition-all max-Wide-mobile-l:text-2xl">
             <button>

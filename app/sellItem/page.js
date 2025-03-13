@@ -320,7 +320,7 @@ const addTofavorit = (item) => {
       <div className="mt-16 w-full flex flex-col items-center">
         <div className="flex flex-col justify-center desktop-s:flex-row items-center desktop-s:items-start">
           <div className="flex flex-col justify-center items-center">
-            <div className="">
+            <div className="w-full flex justify-center items-center">
              <img
                className="h-80 w-80 max-laptop-xl:h-auto max-laptop-xl:w-11/12 object-contain border-2 rounded-3xl mb-2"
                src={Item.photo?.split(`${Ph1.f}`)[1]?.split(`${Ph1.t}`)[0] || ""}
@@ -598,7 +598,7 @@ const addTofavorit = (item) => {
         <Footer />
       </div>
 
-      <div className="w-full flex flex-row justify-between items-center px-8 bg-slate-200 sticky bottom-0 h-16 max-mobile-xl:px-3">
+      <div className="w-full flex flex-row justify-between items-center px-8 bg-slate-200 sticky bottom-14 h-16 max-mobile-xl:px-3">
         <button
           onClick={() =>
             addToCart({

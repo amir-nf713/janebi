@@ -9,10 +9,12 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
   import { Suspense } from "react";
   import Loading from "./loding/Loding";
+  
 
 export default function RootLayout({ children }) {
 
   const router = useRouter()
+  
   const gg = () => {
     router.push("/bascket");
   };
@@ -37,9 +39,6 @@ export default function RootLayout({ children }) {
       router.push("/login");
     }
   };
-
- 
-
 
   
   return (

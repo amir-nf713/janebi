@@ -55,7 +55,6 @@ export default function CategoriBox(props) {
     <div className='flex flex-col font-dorna my-14'>
       <div className="flex justify-between items-center w-full px-8 mb-4 max-Wide-mobile-4xl:px-3">
           <h1 className="max-Wide-mobile-4xl:text-xl text-3xl font-normal">{props.categori}</h1>
-          <p className=" max-Wide-mobile-4xl:text-xl text-2xl font-extrabold flex flex-row cursor-pointer justify-center items-center text-center">مشاهده کامل<span className=""><GoChevronLeft /></span></p>
       </div>
       <div className=" flex flex-row overflow-x-auto sc " ref={contentRef}>
 
