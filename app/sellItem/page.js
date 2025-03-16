@@ -598,7 +598,7 @@ const addTofavorit = (item) => {
         <Footer />
       </div>
 
-      <div className="w-full flex flex-row justify-between items-center px-8 bg-slate-200 sticky bottom-14 h-16 max-mobile-xl:px-3">
+      <div className="w-full flex flex-row justify-between items-center px-8 bg-slate-200 sticky max-Wide-mobile-4xl:bottom-14 bottom-0 h-16 max-mobile-xl:px-3">
         <button
           onClick={() =>
             addToCart({

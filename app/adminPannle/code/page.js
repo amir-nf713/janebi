@@ -54,39 +54,7 @@ export default function ResponsiveForm() {
 
   return (
     <div className="flex flex-col md:flex-row justify-center items-center min-h-screen p-4 gap-6">
-      {/* بخش اول */}
-      <div className="bg-white p-6 shadow-md rounded-xl w-full md:w-1/2">
-        <h2 className="text-xl font-bold mb-4">کد هدیه</h2>
-        <input
-          type="text"
-          name="code"
-          value={formOne.code}
-          onChange={(e) => handleChange(e, setFormOne)}
-          placeholder="کد"
-          className="w-full p-2 border rounded mb-2"
-        />
-        <input
-          type="number"
-          name="time"
-          value={formOne.time}
-          onChange={(e) => handleChange(e, setFormOne)}
-          placeholder="زمان (حداکثر 10)"
-          className="w-full p-2 border rounded mb-2"
-          min="1"
-          max="10"
-        />
-        <input
-          type="number"
-          name="amount"
-          value={formOne.amount}
-          onChange={(e) => handleChange(e, setFormOne)}
-          placeholder="مقدار پول"
-          className="w-full p-2 border rounded mb-2"
-        />
-        <button onClick={one} className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-          تایید
-        </button>
-      </div>
+   
 
       {/* بخش دوم */}
       <div className="bg-white p-6 shadow-md rounded-xl w-full md:w-1/2">

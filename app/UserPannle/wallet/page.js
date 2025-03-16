@@ -88,30 +88,7 @@ const Wallet = () => {
         </div>
 
         {/* بخش کد هدیه */}
-        <div className="mb-6">
-          <input
-            type="text"
-            value={giftCode}
-            onChange={(e) => setGiftCode(e.target.value)}
-            placeholder="کد هدیه خود را وارد کنید"
-            className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
-          />
-          <button
-            onClick={handleGiftCode}
-            className="w-full bg-sky-500 text-white py-2 rounded-lg hover:bg-sky-600 transition duration-300 mt-2"
-          >
-            ثبت کد هدیه
-          </button>
-          {giftMessage && (
-            <p
-              className={`mt-2 text-sm ${
-                giftMessage.includes("❌") ? "text-red-500" : "text-green-500"
-              }`}
-            >
-              {giftMessage}
-            </p>
-          )}
-        </div>
+     
 
         {/* دکمه درخواست برگشت پول */}
         <button

@@ -26,6 +26,7 @@ export default {
       'Wide-mobile-l' : '539px', // h-320
       'Wide-mobile-s' : '485px', // h-800 , h-320 
       'mobile-xl' : '365px', // h-640
+      'mobile-xlk' : '409px', // h-640
       'mobile-l' : '325px', // h-568 , h-533 , h-480 , h-240 
       'mobile-s' : '245px', // h-320
       },
