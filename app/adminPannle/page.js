@@ -24,6 +24,12 @@ useEffect(() => {
   const keych = (e) => {
     setkeye(e.target.value)
   }
+
+  // /api/webdata/add/web/data/in/data/base/
+  const ff = ()=>{
+    axios.get("http://185.190.39.92:3001/api/webdata/add/web/data/in/data/base/")
+    .then(data => alert("دیتا اضافه شد دیگر کلیک نکنید"))
+  }
         
   return (
     <div className="">
@@ -37,6 +43,7 @@ useEffect(() => {
          <Link className='font-dorna font-semibold text-white text-4xl active:bg-sk m-6 transition-all hover:shadow-2xl rounded-3xl bg-sky-600 h-48 w-[402px] flex justify-center items-center' href="/adminPannle/WebInformation">محتوای سایت</Link>      
          <Link className='font-dorna font-semibold text-white text-4xl active:bg-sk m-6 transition-all hover:shadow-2xl rounded-3xl bg-sky-600 h-48 w-[402px] flex justify-center items-center' href="/adminPannle/code">کد تخفیف و هدیه</Link>      
          <Link className='font-dorna font-semibold text-white text-4xl active:bg-sk m-6 transition-all hover:shadow-2xl rounded-3xl bg-sky-600 h-48 w-[402px] flex justify-center items-center' href="/adminPannle/user">مشتریان</Link>   
+         <button onClick={ff} className='font-dorna font-semibold text-white text-4xl active:bg-sk m-6 transition-all hover:shadow-2xl rounded-3xl bg-sky-600 h-48 w-[402px] flex justify-center items-center' >add data</button>   
       </div>
     </div>
   )
