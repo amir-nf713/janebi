@@ -123,12 +123,12 @@ function SearchComponen() {
   const id = Cookies.get("id");
   const router = useRouter();
 
-  useEffect(() => {
-    if (!id) {
-      router.push("/");
-      window.open("./login", "_blank");
-    }
-  }, [id, router]);
+  // useEffect(() => {
+  //   if (!id) {
+  //     router.push("/");
+  //     window.open("./login", "_blank");
+  //   }
+  // }, [id, router]);
 
   const [Item, setItem] = useState({
     onvan: "",

@@ -16,10 +16,16 @@ export default function Page() {
   const [postMoney, setPostMoney] = useState(0);
   const router = useRouter();
 
+  const id = Cookies.get("id");
+  
+
+  
+
   // Fetch cart items from cookies on component mount
   useEffect(() => {
     const getCartItems = () => {
       const items = Cookies.get("cart");
+      console.log("Cart Items:", items); // بررسی ساختار داده‌ها
       setCartItems(items ? JSON.parse(items) : []);
     };
 
@@ -35,11 +41,16 @@ export default function Page() {
       setLoading(false);
       return;
     }
-
+  
     setLoading(true);
+  
+    // Fetch product details for all items in the cart
     Promise.all(cartItems.map(item => axios.get(`${apiKey.getoneitem}/${item.id}`)))
       .then(responses => {
-        const fetchedProducts = responses.map(res => res.data.data);
+        const fetchedProducts = responses
+          .map(res => res.data.data)
+          .filter(product => product !== undefined); // فیلتر کردن undefinedها
+        console.log("Fetched Products:", fetchedProducts); // بررسی ساختار داده‌ها
         setProductDetails(fetchedProducts);
       })
       .catch(error => console.error("Error fetching data:", error))
@@ -48,29 +59,25 @@ export default function Page() {
 
   // Calculate total money and post money
   useEffect(() => {
-    if (productDetails.length === 0) return;
+    if (productDetails.length === 0 || cartItems.length === 0) return;
 
     const total = cartItems.reduce((sum, item) => {
       const product = productDetails.find(p => p._id === item.id);
-      if (!product) return sum;
+      if (!product) return sum; // اگر محصول وجود نداشت، از آن صرف‌نظر کن
       const itemPrice = Math.floor((product.money / 100) * (100 - product.offer) / 1000) * 1000;
       return sum + itemPrice * item.quantity;
     }, 0);
 
     setTotalMoney(total);
 
-    // Fetch post money (assuming it's a fixed value or fetched from an API)
- 
+    // Fetch post money
+    axios.get(apiKey.Web)
+      .then(data => {
+        const dataWeb = data.data.data[0];
+        setPostMoney(dataWeb.postMoney);
+      })
+      .catch(error => console.error("Error fetching post money:", error));
   }, [cartItems, productDetails]);
-
-  
-  axios.get(apiKey.Web)
-  .then(data => {
-    const dataWeb = data.data.data[0];
-    setPostMoney(dataWeb.postMoney);
-  })
-  .catch(error => console.error("Error fetching post money:", error));
-
 
   // Update cart in cookies and state
   const updateCart = useCallback((updatedCart) => {
@@ -111,35 +118,54 @@ export default function Page() {
     return <div className="text-center text-2xl">در حال بارگذاری...</div>;
   }
 
-  const kk = (e) => {
-     router.push(`/sell?amount=${e}`)
-  }
+  const handleCheckout = (amount) => {
+    
+      if (!id) {
+        router.push("/login");
+        
+      }
+    
+
+    router.push(`/sell?amount=${amount}`);
+  };
 
   return (
     <div className="text-2xl p-5 font-dorna w-full items-center justify-center">
       {cartItems.length > 0 ? (
         cartItems.map((cartItem, index) => {
           const product = productDetails.find(p => p._id === cartItem.id);
-          if (!product) return null;
+          if (!product) return null; // اگر محصول وجود نداشت، رندر نشود
 
           return (
             <div key={index} className="border p-4 mb-4 max-laptop-l:flex-col flex items-center w-full justify-around border-sky-400">
               <div className="max-Wide-mobile-s:mb-3 max-laptop-l:w-full max-laptop-l:justify-start flex flex-row items-center justify-between">
-                <img src={product.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""} alt="img" className="w-20 h-20 object-cover" />
-                <div className="max-laptop-l:mr-3 max-laptop-l:text-2xl font-bold w-[100%] max-desktop-l:text-lg">{product.onvan}</div>
+                <img
+                  src={product.photo?.split("ph1:")[1]?.split("ph2:")[0] || ""}
+                  alt="img"
+                  className="w-20 h-20 object-cover"
+                />
+                <div className="mr-4 max-laptop-l:mr-3 text-sky-800 max-laptop-l:text-2xl flex justify-center items-center font-bold  max-desktop-l:text-lg">
+                  {`${product.onvan} - ${cartItem.model}`}
+                  
+         
+                </div>
               </div>
               <div className="flex-wrap flex w-[50%] max-laptop-l:w-full flex-row justify-around items-center">
-                <div className="mx-3 text-sm w-[10%] text-gray-500">{cartItem.model}</div>
-                <div className="mx-3 flex items-center gap-2">
-                  <span className="text-sm">رنگ:</span>
-                  <div className="w-6 h-6 rounded-full border border-black" style={{ background: cartItem.color }}></div>
-                </div>
-                <div className="mx-3 text-lg font-semibold w-[10%] flex flex-row">
+                
+                
+                <div className="max-mobile-xlk:mb-3 justify-center items-center text-lg font-semibold  flex flex-row">
                   {Math.floor((product.money / 100) * (100 - product.offer) / 1000) * 1000} تومان
+                  <div
+                    className="w-6 h-6 mr-5 rounded-full border border-black"
+                    style={{ background: cartItem.color }}
+                  ></div>
                 </div>
                 <div className="flex flex-row justify-center items-center">
                   <div className="mx-3 flex items-center gap-2">
-                    <button onClick={() => increaseQuantity(cartItem.id)} className="p-2 bg-sky-500 text-white rounded">
+                    <button
+                      onClick={() => increaseQuantity(cartItem.id)}
+                      className="p-2 bg-sky-500 text-white rounded"
+                    >
                       <FaPlus />
                     </button>
                     <span className="text-xl">{cartItem.quantity}</span>
@@ -151,7 +177,10 @@ export default function Page() {
                       <GoDash />
                     </button>
                   </div>
-                  <button onClick={() => removeItem(cartItem.id)} className="ml-auto p-2 bg-black text-white rounded">
+                  <button
+                    onClick={() => removeItem(cartItem.id)}
+                    className="ml-auto p-2 bg-black text-white rounded"
+                  >
                     <FaTrashAlt />
                   </button>
                 </div>
@@ -163,8 +192,8 @@ export default function Page() {
         <p className="font-extrabold text-2xl w-full flex justify-center items-center">سبد خرید خالی است</p>
       )}
 
-      <button onClick={returnToHome} className="mb-3 cursor-pointer text-2xl font-bold bg-sky-700 text-white h-16 active:bg-sky-900 w-60">ادامه خرید</button>
-      <div className="w-full flex justify-between items-center flex-row text-slate-400">
+    
+      <div className="w-full mt-5 flex justify-between items-center flex-row text-slate-400">
         <span className="bg-slate-400 h-1 w-[48%]"></span>
         <span className="text-4xl"><HiFire /></span>
         <span className="bg-slate-400 h-1 w-[48%]"></span>
@@ -179,13 +208,18 @@ export default function Page() {
           </div>
           <div className="mt-3 flex px-4 justify-between items-center w-11/12 bg-white h-24 shadow-md border border-black">
             <span>هزینه پست</span>
-            <span className=" font-extrabold">{postMoney} تومان</span>
+            <span className="font-extrabold">{postMoney} تومان</span>
           </div>
           <div className="mt-3 flex px-4 justify-between items-center w-11/12 bg-white h-24 shadow-md border border-black">
             <span>جمع کل</span>
             <span className="text-sky-600 font-extrabold">{totalMoney + postMoney} تومان</span>
           </div>
-          <button onClick={() => kk(totalMoney + postMoney)} className="max-Wide-mobile-xl:w-11/12 mt-6 flex px-4 justify-center items-center w-1/3 bg-sky-600 h-16 shadow-md font-extrabold text-white">تکمیل خرید</button>
+          <button
+            onClick={() => handleCheckout(totalMoney + postMoney)}
+            className="max-Wide-mobile-xl:w-11/12 mt-6 flex px-4 justify-center items-center w-1/3 bg-sky-600 h-16 shadow-md font-extrabold text-white"
+          >
+            تکمیل خرید
+          </button>
         </div>
         <div className="flex flex-col justify-center items-center max-desktop-l:mt-6">
           <span className="max-Wide-mobile-2xl:text-6xl text-9xl font-extrabold text-black">SPEED</span>
