@@ -49,7 +49,8 @@ export default function RootLayout({ children }) {
       {children}
     </Suspense>
  
-           <div className="bg-white hidden w-full max-Wide-mobile-4xl:flex sticky h-14 items-center justify-around text-2xl bottom-0">
+    <div className="bg-white hidden w-full max-Wide-mobile-4xl:flex fixed h-14 items-center justify-around text-2xl bottom-0">
+
                <div onClick={gg} className="">
                   <GrBasket />
                </div>
