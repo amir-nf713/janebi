@@ -70,7 +70,7 @@ export default function Nav({ targetRef }) {
       <div className="flex flex-row-reverse items-center justify-between">
         <div
           onClick={gg}
-          className="mr-2 max-Wide-mobile-4xl:hidden max-Wide-mobile-l:mr-1 max-tablet-xl:mr-1 ml-11 text-4xl max-tablet-xl:text-xl p-3 max-tablet-xl:ml-3 max-Wide-mobile-l:text-xl cursor-pointer max-Wide-mobile-l:border-none  "
+          className="mr-2  max-Wide-mobile-l:mr-1 max-tablet-xl:mr-1 ml-11 text-4xl max-tablet-xl:text-xl pl-3 max-tablet-xl:ml-3 max-Wide-mobile-l:text-xl cursor-pointer max-Wide-mobile-l:border-none  "
         >
           <GrBasket />
         </div>
@@ -86,11 +86,14 @@ export default function Nav({ targetRef }) {
         <SearchInput></SearchInput>
       </div>
 
+<Link className="h-full w-auto bg-transparent" href={"/"}>
       <img
         className="h-full w-auto bg-transparent"
         src="/Frame_395-removebg-preview.png"
         alt="logo"
       />
+</Link>
+      
 
       <div
         

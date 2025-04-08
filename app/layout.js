@@ -7,8 +7,9 @@ import { GrFavorite } from "react-icons/gr";
 import { AiOutlineShop } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-  import { Suspense } from "react";
-  import Loading from "./loding/Loding";
+import { Suspense } from "react";
+import Loading from "./loding/Loding";
+import { IoHomeOutline } from "react-icons/io5";
   
 
 export default function RootLayout({ children }) {
@@ -16,7 +17,7 @@ export default function RootLayout({ children }) {
   const router = useRouter()
   
   const gg = () => {
-    router.push("/bascket");
+    router.push("/");
   };
 
 
@@ -52,7 +53,7 @@ export default function RootLayout({ children }) {
     <div className="bg-white hidden w-full max-Wide-mobile-4xl:flex fixed h-14 items-center justify-around text-2xl bottom-0">
 
                <div onClick={gg} className="">
-                  <GrBasket />
+                 <IoHomeOutline />
                </div>
 
                <div onClick={accontt} className="">

@@ -49,13 +49,12 @@ export default function ItemSerrc(props) {
             <>
               <p className="text-2xl max-Wide-mobile-s:hidden max-laptop-xl:text-xl max-mobile-l:hidden font-black text-slate-500 line-through max-Wide-mobile-l:text-sm">
                 {" "}
-                {props.money}
+                {props.money.toLocaleString()}
               </p>{" "}
               {/* قیمت اصلی که خط خورده */}
               <p className="text-4xl max-laptop-xl:text-2xl font-black max-Wide-mobile-l:text-sm">
                 {" "}
-                {Math.floor(((props.money / 100) * (100 - props.off)) / 1000) *
-                  1000}{" "}
+                {Math.floor((((props.money / 100) * (100 - props.off)) / 1000) * 1000 ).toLocaleString()}{" "}
                 <span className="text-xl text-gray-700 max-Wide-mobile-l:text-sm">
                   تومان
                 </span>

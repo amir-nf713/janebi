@@ -469,8 +469,9 @@ const addTofavorit = (item) => {
             </div>
           </div>
         </div>
-
-        <div className="w-full flex justify-center items-center mt-8">
+{
+  Item.devaiceOK.length > 1 ? (
+     <div className="w-full flex justify-center items-center mt-8">
           <select
             value={ee}
             onChange={eee}
@@ -485,6 +486,9 @@ const addTofavorit = (item) => {
               ))}
           </select>
         </div>
+  ) : (<></>)
+}
+       
       </div>
 
       <div className="mt-14 w-[94%]">
