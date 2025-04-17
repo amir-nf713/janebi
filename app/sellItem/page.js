@@ -25,14 +25,25 @@ function SearchComponen() {
   const [ico, setico] = useState(<GrFavorite />);
   const [selectedColor, setselectedColor] = useState("");
   const [selectedQuantity, setselectedQuantity] = useState(1);
+  const [cartItems, setCartItems] = useState([]);
   const [ee, setee] = useState("");
   const colorHandler = (e) => {
     setselectedColor(e);
   };
-
+  const carts = Cookies.get("cart");
   const eee = (e) => {
     setee(e.target.value);
   };
+  useEffect(() => {
+    const getCartItems = () => {
+      const items = Cookies.get("cart");
+      console.log("Cart Items:", items); // بررسی ساختار داده‌ها
+      setCartItems(items ? JSON.parse(items) : []);
+    }; 
+    getCartItems();
+    window.addEventListener("storage", getCartItems);
+    return () => window.removeEventListener("storage", getCartItems);
+  }, []);
 
   const addToCart = (item) => {
     let cart = Cookies.get("cart");
@@ -41,7 +52,7 @@ function SearchComponen() {
     // بررسی اینکه آیا محصول قبلاً اضافه شده
     const existingItemIndex = cart.findIndex(
       (p) =>
-        p.id === item.id && p.color === item.color && p.model === item.model
+        p.id === item.id && p.color === item.color && p.model === item.model && p.k === item.k
     );
 
     if (existingItemIndex !== -1) {
@@ -53,9 +64,9 @@ function SearchComponen() {
     }
 
     // ذخیره دوباره در کوکی
-    Cookies.set("cart", JSON.stringify(cart), { expires: 7 }); // داده‌ها ۷ روز حفظ می‌شوند
+    Cookies.set("cart", JSON.stringify(cart), { expires: 1 }); // داده‌ها ۷ روز حفظ می‌شوند
 
-    router.push("/bascket")
+    router.push("/search?query=")
   };
 
 
@@ -481,7 +492,7 @@ const addTofavorit = (item) => {
             {Array.isArray(Item.devaiceOK) &&
               Item.devaiceOK.map((item, index) => (
                 <option key={index} value={item}>
-                  {item}
+                  {item.name}
                 </option>
               ))}
           </select>
@@ -603,10 +614,13 @@ const addTofavorit = (item) => {
       </div>
 
       <div className="w-full flex flex-row justify-between items-center px-8 bg-slate-200 sticky max-Wide-mobile-4xl:bottom-14 bottom-0 h-16 max-mobile-xl:px-3">
-        <button
+
+        {Item.devaiceOK.length > 1 ? (
+          <button
           onClick={() =>
             addToCart({
               id: Item._id,
+              k: cartItems.length, 
               color: selectedColor,
               quantity: selectedQuantity,
               model: ee,
@@ -624,6 +638,29 @@ const addTofavorit = (item) => {
             <>افزودن به سبد خرید</>
           )}
         </button>
+        ) : (  
+        <button
+          onClick={() =>
+            addToCart({
+              id: Item._id,
+              k: cartItems.length, 
+              color: selectedColor,
+              quantity: selectedQuantity,
+              model: Item.berand,
+            })
+          }
+          className="bg-blue-950 max-Wide-mobile-s:w-[55%] max-Wide-mobile-s:flex max-Wide-mobile-s:justify-center max-Wide-mobile-s:items-center max-Wide-mobile-s:text-xs max-Wide-mobile-s:h-[80%] text-white px-6 py-3 rounded-lg text-lg font-bold flex items-center disabled:bg-gray-400 disabled:cursor-not-allowed max-mobile-xl:w-[60%]"
+          disabled={!selectedColor || !selectedQuantity }
+        >
+          <BsBasket2Fill className="ml-2" />
+          {selectedColor === "" ? (
+            <> یک رنگ انتخواب کن </>
+          ) : (
+            <>افزودن به سبد خرید</>
+          )}
+        </button>
+      )}
+        
         <div className="text-xl max-Wide-mobile-s:text-sm font-extrabold">
           {(
             Math.floor(((Item.money / 100) * (100 - Item.offer)) / 1000) * 1000

@@ -48,11 +48,14 @@ function SearchCompone() {
   useEffect(() => {
     const newDevaice = [];
 
-    Categori.forEach((item) => {
+    Categori.map((item, index) => {
+      
+       
       if (item.categori === onvan) {
         item.devaiceOK.forEach((device) => {
-          if (!newDevaice.includes(device)) {
-            newDevaice.push(device);
+          if (!newDevaice.includes(device.name)) {
+            // console.log(device.name);
+            newDevaice.push(device.name);
           }
         });
       }
@@ -89,7 +92,7 @@ function SearchCompone() {
     <div className="flex justify-around overflow-y-auto  items-center font-dorna ">
       {/* ✅ پنل فیلتر */}
       <div
-        className={`bg-white shadow-lg max-laptop-xl:w-60 h-[95vh] flex items-center flex-col max-laptop-xl:absolute w-[25%] ${openSlider} transition-all`}
+        className={`bg-white shadow-lg  max-laptop-xl:w-60 h-[95vh] flex items-center flex-col max-laptop-xl:absolute w-[25%] ${openSlider} transition-all`}
       >
         <button
           onClick={clickhanler}
@@ -153,7 +156,7 @@ function SearchCompone() {
           {Categori.filter(
             (item) =>
               selectedDevices.length === 0 || // ✅ اگر هیچ فیلتری انتخاب نشده باشد، همه را نمایش بده
-              item.devaiceOK.some((device) => selectedDevices.includes(device)) // ✅ بررسی اینکه حداقل یک دستگاه انتخاب شده باشد
+              item.devaiceOK.some((device) => selectedDevices.includes(device.name)) // ✅ بررسی اینکه حداقل یک دستگاه انتخاب شده باشد
           ).map((item, index) => (
             <div
               onClick={() => jh(item._id)}

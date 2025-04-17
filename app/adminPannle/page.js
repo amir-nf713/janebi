@@ -4,10 +4,15 @@ import Link from "next/link";
 import axios from 'axios';
 import apiKey from '../API';
 
+
 export default function AdminPannle() {
+ 
+  
+
   const [key, setkey] = useState("hidden")
   const [ke, setke] = useState("flex")
   const [keye, setkeye] = useState("")
+
 useEffect(() => {
   axios.post(`${apiKey.getOneAdmin}${keye}`)
   .then(data => {
@@ -42,7 +47,7 @@ useEffect(() => {
          <Link className='font-dorna font-semibold text-white text-4xl active:bg-sk m-6 transition-all hover:shadow-2xl rounded-3xl bg-sky-600 h-48 w-[402px] flex justify-center items-center' href="/adminPannle/sefaresh">سفارش ها</Link>      
          <Link className='font-dorna font-semibold text-white text-4xl active:bg-sk m-6 transition-all hover:shadow-2xl rounded-3xl bg-sky-600 h-48 w-[402px] flex justify-center items-center' href="/adminPannle/WebInformation">محتوای سایت</Link>      
          <Link className='font-dorna font-semibold text-white text-4xl active:bg-sk m-6 transition-all hover:shadow-2xl rounded-3xl bg-sky-600 h-48 w-[402px] flex justify-center items-center' href="/adminPannle/code">کد تخفیف و هدیه</Link>      
-         <Link className='font-dorna font-semibold text-white text-4xl active:bg-sk m-6 transition-all hover:shadow-2xl rounded-3xl bg-sky-600 h-48 w-[402px] flex justify-center items-center' href="/adminPannle/user">مشتریان</Link>   
+         <Link className='font-dorna font-semibold text-white text-4xl active:bg-sk m-6 transition-all hover:shadow-2xl rounded-3xl bg-sky-600 h-48 w-[402px] flex justify-center items-center' href="/adminPannle/user?id=">مشتریان</Link>   
          <button onClick={ff} className='font-dorna font-semibold text-white text-4xl active:bg-sk m-6 transition-all hover:shadow-2xl rounded-3xl bg-sky-600 h-48 w-[402px] flex justify-center items-center' >add data</button>   
       </div>
     </div>
