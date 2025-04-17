@@ -24,12 +24,17 @@ function SearchComponen() {
   
   const [ico, setico] = useState(<GrFavorite />);
   const [selectedColor, setselectedColor] = useState("");
+  const [selectedIndexColor, setselectedIndexColor] = useState("");
+  const [mojodiColor, setmojodiColor] = useState("");
   const [selectedQuantity, setselectedQuantity] = useState(1);
   const [cartItems, setCartItems] = useState([]);
   const [ee, setee] = useState("");
-  const colorHandler = (e) => {
+  const colorHandler = (e, index) => {
     setselectedColor(e);
+    setselectedIndexColor(index)
   };
+
+  
   const carts = Cookies.get("cart");
   const eee = (e) => {
     setee(e.target.value);
@@ -319,8 +324,17 @@ const addTofavorit = (item) => {
   Cookies.set("favorit", JSON.stringify(cart), { expires: 7 }); // Data persists for 7 days
    jf()
 };
-
-
+useEffect(() => {
+  if (ee && selectedIndexColor !== "" && Item.devaiceOK) {
+    const foundDevice = Item.devaiceOK.find(data => data.name === ee);
+    
+    if (foundDevice?.mojodi?.[selectedIndexColor] !== undefined) {
+      setmojodiColor(foundDevice.mojodi[selectedIndexColor]);
+    } else {
+      setmojodiColor(""); // یا مقدار پیش‌فرض مناسب
+    }
+  }
+}, [ee, selectedColor, selectedIndexColor, Item.devaiceOK]);
   
 
   return (
@@ -459,47 +473,73 @@ const addTofavorit = (item) => {
                 </div>
               </div>
 
-              <div className="flex flex-wrap justify-center w-full laptop-xl:w-3/5 mt-4">
-                {Array.isArray(Item.color) &&
-                  Item.color.map((color, index) => (
-                    <div
-                      key={index}
-                      className="m-2 w-10 h-10 rounded-full border-2 border-black color-circle"
-                      style={{ backgroundColor: color }}
-                      onClick={(e) => {
-                        document
-                          .querySelectorAll(".color-circle")
-                          .forEach((el) => el.classList.remove("active"));
-                        e.currentTarget.classList.add("active");
-                        colorHandler(color);
-                      }}
-                    ></div>
-                  ))}
-              </div>
-              
+              {mojodiColor > 0 && mojodiColor < 2 ? (
+  <p className="text-red-600 text-xl">فقط {mojodiColor} عدد مانده است</p>
+) : (<></>)
+}  
             </div>
           </div>
         </div>
-{
-  Item.devaiceOK.length > 1 ? (
-     <div className="w-full flex justify-center items-center mt-8">
-          <select
-            value={ee}
-            onChange={eee}
-            className="w-11/12 p-3 text-lg desktop-s:text-2xl bg-white border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          >
-            <option value="">مدل مورد نظر را انتخاب کنید</option>
-            {Array.isArray(Item.devaiceOK) &&
-              Item.devaiceOK.map((item, index) => (
-                <option key={index} value={item}>
-                  {item.name}
-                </option>
-              ))}
-          </select>
-        </div>
-  ) : (<></>)
+        {
+  Array.isArray(Item.devaiceOK) && Item.devaiceOK.length > 1 && (
+    <div className="w-full flex justify-center items-center mt-8">
+      <select
+        value={ee}
+        onChange={eee}
+        className="w-11/12 p-3 text-lg desktop-s:text-2xl bg-white border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+      >
+        <option value="">مدل مورد نظر را انتخاب کنید</option>
+        {Item.devaiceOK
+          .filter(item => {
+            // بررسی وجود mojodi و اینکه آرایه است
+            if (!Array.isArray(item.mojodi)) return false;
+            
+            // بررسی اینکه حداقل یک آیتم با موجودی بیشتر از 0 وجود دارد
+            return item.mojodi.some(mojod => {
+              const quantity = Number(mojod);
+              return !isNaN(quantity) && quantity > 0;
+            });
+          })
+          .map((item, index) => (
+            <option key={`${item.name}-${index}`} value={item.name}>
+              {item.name}
+            </option>
+          ))}
+      </select>
+    </div>
+  )
 }
-       
+
+<div className="flex flex-wrap justify-center w-full laptop-xl:w-3/5 mt-4">
+  {Array.isArray(Item.color) &&
+    Item.color.map((color, index) => {
+      // بررسی موجودی رنگ
+      const isAvailable = Item.devaiceOK?.some(device => 
+        device.name === ee && 
+        device.mojodi?.[index] > 0
+      );
+
+      // اگر ee خالی است یا رنگ موجود است، نمایش بده
+      if (ee !== "" && isAvailable) {
+        return (
+          <button
+            key={index}
+            className="m-2 w-10 h-10 rounded-full border-2 border-black color-circle"
+            style={{ backgroundColor: color }}
+            onClick={(e) => {
+              document.querySelectorAll(".color-circle").forEach(el => 
+                el.classList.remove("active")
+              );
+              e.currentTarget.classList.add("active");
+              colorHandler(color, index);
+            }}
+          ></button>
+        );
+      }
+      return null;
+    })}
+</div>
+              
       </div>
 
       <div className="mt-14 w-[94%]">
