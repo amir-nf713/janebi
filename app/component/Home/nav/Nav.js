@@ -113,12 +113,32 @@ export default function Nav({ targetRef }) {
     Cookies.set("cart", JSON.stringify(updatedCart), { expires: 1 });
   }, []);
 
-  const increaseQuantity = useCallback((k) => {
-    const updatedCart = cartItems.map(item =>
-      item.k === k ? { ...item, quantity: (item.quantity || 1) + 1 } : item
-    );
+  const increaseQuantity = useCallback((k, id) => {
+    const updatedCart = cartItems.map(item => {
+      if (item.k === k) {
+        const product = productDetails.find(p => p._id === id);
+        if (!product) return item;
+  
+        let canIncrease = false;
+        
+        // Check all variants for available stock
+        product.devaiceOK.forEach(variant => {
+          variant.mojodi.forEach((stock, colorIndex) => {
+            if (item.indexcolor === colorIndex && stock > item.quantity) {
+              canIncrease = true;
+            }
+          });
+        });
+  
+        if (canIncrease) {
+          return { ...item, quantity: (item.quantity || 1) + 1 };
+        }
+      }
+      return item;
+    });
+  
     updateCart(updatedCart);
-  }, [cartItems, updateCart]);
+  }, [cartItems, productDetails, updateCart]);
 
   const decreaseQuantity = useCallback((k) => {
     const updatedCart = cartItems
@@ -346,7 +366,7 @@ let c = 0
                 <div className="flex flex-row justify-center items-center">
                   <div className="mx-3 flex items-center gap-2">
                     <button
-                      onClick={() => increaseQuantity(cartItem.k)}
+                      onClick={() => increaseQuantity(cartItem.k, cartItem.id)}
                       className="p-2 bg-sky-500 text-white rounded"
                     >
                       <FaPlus />

@@ -71,7 +71,7 @@ function SearchComponen() {
     // ذخیره دوباره در کوکی
     Cookies.set("cart", JSON.stringify(cart), { expires: 1 }); // داده‌ها ۷ روز حفظ می‌شوند
 
-    router.push("/search?query=")
+    router.push("/")
   };
 
 
@@ -660,6 +660,7 @@ useEffect(() => {
           onClick={() =>
             addToCart({
               id: Item._id,
+              indexcolor : selectedIndexColor, 
               k: cartItems.length, 
               color: selectedColor,
               quantity: selectedQuantity,
@@ -683,6 +684,7 @@ useEffect(() => {
           onClick={() =>
             addToCart({
               id: Item._id,
+              indexcolor : selectedIndexColor, 
               k: cartItems.length, 
               color: selectedColor,
               quantity: selectedQuantity,
