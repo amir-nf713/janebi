@@ -6,7 +6,7 @@ export default function TrackingOrder() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-900 font-dorna">
       {/* ✅ هدر صفحه */}
       <h1 className="text-4xl font-extrabold text-blue-700">پیگیری سفارش</h1>
-      <p className="text-lg mt-2">برای پیگیری سفارش، لطفاً با پشتیبانی تلگرام در تماس باشید.</p>
+      <p className="text-lg mt-2 px-4"> برای پیگیری سفارش، لطفاً با پشتیبانی تلگرام در تماس باشید یا بارکد پستی را ازداخل پروفایل قسمت سفارشات دریافت کنید</p>
 
       {/* ✅ دکمه هدایت به تلگرام */}
       <a

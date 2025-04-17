@@ -425,7 +425,7 @@ let c = 0
                 <span className="">{c.toLocaleString()} تومان</span>
                 <span className="text-lg text-gray-500">مبلغ سبد خرید :</span>
               </div>
-              <button className="w-11/12 h-16 bg-sky-500 text-white rounded-full text-2xl font-dorna font-bold">ثبت نهایی</button>
+              <Link href={"/buyBasket"} className="w-11/12 h-16 bg-sky-500 text-white rounded-full flex justify-center items-center text-2xl font-dorna font-bold">ثبت نهایی</Link>
             </div>
        </div>
 

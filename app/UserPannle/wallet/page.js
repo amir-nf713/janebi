@@ -1,82 +1,82 @@
 "use client"
-import React, { useState } from "react";
+import apiKey from "@/app/API";
+import axios from "axios";
+import Cookies from "js-cookie";
+import React, { useEffect, useState } from "react";
 
 const Wallet = () => {
-  const [balance, setBalance] = useState(100000); // موجودی کیف پول
-  const [giftCode, setGiftCode] = useState(""); // کد هدیه
-  const [showModal, setShowModal] = useState(false); // نمایش یا پنهان کردن Modal
-  const [amount, setAmount] = useState(""); // مقدار درخواستی
-  const [shebaNumber, setShebaNumber] = useState(""); // شماره شبا
-  const [error, setError] = useState(""); // پیام خطا
-  const [giftMessage, setGiftMessage] = useState(""); // پیام مربوط به کد هدیه
+  const [money, setMoney] = useState(0);
+  const [giftCode, setGiftCode] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [amount, setAmount] = useState("");
+  const [shebaNumber, setShebaNumber] = useState("");
+  const [error, setError] = useState("");
+  const [giftMessage, setGiftMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
-  
+  const id = Cookies.get("id");
 
-  // تابع برای ثبت کد هدیه
-  const handleGiftCode = () => {
-    if (giftCode === "HAPPY2023") {
-      setBalance(balance + 50); // افزودن ۵۰ واحد به موجودی
-      setGiftMessage("🎉 کد هدیه با موفقیت اعمال شد!");
-    } else {
-      setGiftMessage("❌ کد هدیه نامعتبر است.");
-    }
-    setGiftCode(""); // پاک کردن فیلد کد
-  };
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(apiKey.user);
+        const user = response.data.data.find((element) => element._id === id);
+        if (user) {
+          setMoney(user.cash);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", );
+        setError("Failed to load wallet data");
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  // تابع برای باز کردن Modal
+    if (id) fetchUserData();
+  }, [id]);
+
   const openModal = () => {
     setShowModal(true);
   };
 
-  // تابع برای بستن Modal
   const closeModal = () => {
     setShowModal(false);
-    setError(""); // پاک کردن پیام خطا
-    setAmount(""); // پاک کردن مقدار درخواستی
-    setShebaNumber(""); // پاک کردن شماره شبا
+    setError("");
+    setAmount("");
+    setShebaNumber("");
   };
 
-  // تابع برای اعتبارسنجی شماره شبا
   const validateSheba = (sheba) => {
-    // شماره شبا باید ۲۴ کاراکتر باشد و با "IR" شروع شود
     const shebaRegex = /^IR[0-9]{24}$/;
     return shebaRegex.test(sheba);
   };
 
-  // تابع برای درخواست برگشت پول
   const handleRefund = () => {
     const requestedAmount = parseFloat(amount);
 
-    // بررسی اینکه مقدار درخواستی معتبر است
-    if (isNaN(requestedAmount)) {
+    if (isNaN(requestedAmount) || requestedAmount <= 0) {
       setError("لطفاً یک مقدار معتبر وارد کنید.");
       return;
     }
 
-    // بررسی اینکه مقدار درخواستی از موجودی بیشتر نباشد
-    if (requestedAmount > balance) {
+    if (requestedAmount > money) {
       setError("مبلغ درخواستی بیشتر از موجودی کیف پول است.");
       return;
     }
 
-    // بررسی اینکه شماره شبا معتبر است
     if (!validateSheba(shebaNumber)) {
       setError("شماره شبا نامعتبر است. لطفاً شماره شبا را به درستی وارد کنید.");
       return;
     }
 
-    // انجام عملیات برگشت پول
-    setBalance(balance - requestedAmount);
-    setError(""); // پاک کردن پیام خطا
-    closeModal(); // بستن Modal
-    alert(`مبلغ ${requestedAmount} تومان به شماره شبا ${shebaNumber} واریز شد.`);
+    setMoney(prev => prev - requestedAmount);
+    closeModal();
+    alert(`مبلغ ${requestedAmount.toLocaleString()} تومان به شماره شبا ${shebaNumber} واریز شد.`);
   };
 
-  // تابع برای وارد کردن اشتباه شماره شبا
-  const handleWrongSheba = () => {
-    setShebaNumber("IR123456789012345678901234"); // یک شماره شبا اشتباه
-    setError("شماره شبا به‌طور خودکار وارد شد. لطفاً آن را بررسی کنید.");
-  };
+  if (isLoading) {
+    return <div className="min-h-screen bg-white flex items-center justify-center">Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center p-4">
@@ -84,32 +84,24 @@ const Wallet = () => {
         <h1 className="text-2xl font-bold text-sky-500 mb-4">کیف پول شما</h1>
         <div className="bg-sky-50 p-6 rounded-lg mb-6">
           <p className="text-gray-700 text-lg">موجودی فعلی:</p>
-          <p className="text-sky-500 text-3xl font-bold mt-2">تومان{balance.toLocaleString()}</p>
+          <p className="text-sky-500 text-3xl font-bold mt-2">{money.toLocaleString()} تومان</p>
         </div>
 
-        {/* بخش کد هدیه */}
-     
-
-        {/* دکمه درخواست برگشت پول */}
         <button
           onClick={openModal}
-          className="w-full bg-sky-500 text-white py-2 rounded-lg hover:bg-sky-600 transition duration-300"
+          className="w-full bg-sky-500 text-white py-2 rounded-lg hover:bg-sky-600 transition duration-300 disabled:opacity-50"
+          disabled={money <= 0}
         >
           درخواست برگشت پول
         </button>
       </div>
 
-      {/* Modal برای درخواست برگشت پول */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-          <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md transform transition-all duration-300 ease-in-out translate-y-0">
-            <h2 className="text-xl font-bold text-sky-500 mb-4">
-              درخواست برگشت پول
-            </h2>
+          <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+            <h2 className="text-xl font-bold text-sky-500 mb-4">درخواست برگشت پول</h2>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm mb-2">
-                شماره شبا:
-              </label>
+              <label className="block text-gray-700 text-sm mb-2">شماره شبا:</label>
               <input
                 type="text"
                 value={shebaNumber}
@@ -119,15 +111,15 @@ const Wallet = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm mb-2">
-                مبلغ درخواستی:
-              </label>
+              <label className="block text-gray-700 text-sm mb-2">مبلغ درخواستی:</label>
               <input
                 type="number"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder="مبلغ به تومان"
                 className="w-full px-4 py-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
+                min="0"
+                max={money}
               />
             </div>
             {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
@@ -141,12 +133,11 @@ const Wallet = () => {
               <button
                 onClick={handleRefund}
                 className="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-600 transition duration-300"
+                disabled={!amount || !shebaNumber}
               >
                 تأیید
               </button>
             </div>
-            {/* دکمه وارد کردن اشتباه شماره شبا */}
-           
           </div>
         </div>
       )}
