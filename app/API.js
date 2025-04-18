@@ -25,4 +25,5 @@ const apiKey = {
     user: `${Url}/api/register/user`
 }
 
-module.exports = apiKey; // اگر از require استفاده می‌کنید
+
+export default apiKey
