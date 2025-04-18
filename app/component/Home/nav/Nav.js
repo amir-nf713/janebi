@@ -195,7 +195,7 @@ let c = 0
 
       <div
         
-        className={`fixed bg-neutral-100 z-[99999] h-[100vh] text-3xl w-60  ${w} transition-all overflow-auto items-center justify-start top-0 max-desktop-xl:flex flex-col hidden z-[100]`}
+        className={`fixed bg-neutral-100 z-[999999999999] h-[100vh] text-3xl w-60  ${w} transition-all overflow-auto items-center justify-start top-0 max-desktop-xl:flex flex-col hidden z-[100]`}
       >
         <button
           onClick={hh}
@@ -329,7 +329,7 @@ let c = 0
 
 {/* ---------------------= */}
 
-       <div className={`fixed flex flex-col justify-between top-0 ${close} transition-all w-96 max-mobile-xlk:w-64 h-[100vh] bg-slate-50 z-[10010]`}>
+       <div className={`fixed flex flex-col justify-between top-0 ${close} transition-all w-96 max-mobile-xlk:w-64 h-[100vh] bg-slate-50 z-[100000000001]`}>
             
             <div className="">
                  <div onClick={jh} className="w-full text-sky-600 text-2xl px-6 py-5 flex justify-between flex-row-reverse items-center font-bold font-dorna">

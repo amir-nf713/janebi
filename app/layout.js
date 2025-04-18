@@ -50,7 +50,7 @@ export default function RootLayout({ children }) {
       {children}
     </Suspense>
  
-    <div className="bg-white z-[100000000000] hidden w-full max-Wide-mobile-4xl:flex fixed h-14 items-center justify-around text-2xl bottom-0">
+    <div className="bg-white z-[1000000000] hidden w-full max-Wide-mobile-4xl:flex fixed h-14 items-center justify-around text-2xl bottom-0">
 
                <div onClick={gg} className="">
                  <IoHomeOutline />
