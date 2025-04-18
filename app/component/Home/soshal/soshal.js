@@ -20,7 +20,7 @@ export default function Soshal() {
               setBasket([response.data.data]); // تبدیل شیء به آرایه برای جلوگیری از خطا
             }
           })
-          .catch(error => console.error("Error fetching data:"));
+          .catch(error => console.error("Error fetching data: ",error));
       
     }, []); // وابستگی به `id`
   return (
