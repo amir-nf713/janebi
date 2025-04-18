@@ -1,3 +1,5 @@
+
+const Url = 'https://janebi-speed.ir' //  'https://janebi-speed.ir'
 const apiKey = {
     sendSms: `${Url}/api/register/sms/smsSend`,
     postUser: `${Url}/api/register/user`,
@@ -24,3 +26,4 @@ const apiKey = {
 }
 
 module.exports = apiKey; // اگر از require استفاده می‌کنید
+export default apiKey
