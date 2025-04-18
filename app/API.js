@@ -1,5 +1,5 @@
 
-const Url = 'http://localhost:3001' //  'https://janebi-speed.ir'
+const Url = 'https://janebi-speed.ir' //  'https://janebi-speed.ir'
 const apiKey = ({
 
     sendSms: `${Url}/api/register/sms/smsSend`,
