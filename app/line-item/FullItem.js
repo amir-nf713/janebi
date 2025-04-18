@@ -69,6 +69,8 @@ export default function FullItem() {
   }, []);
 
 
+
+
   return (
     <div>
 

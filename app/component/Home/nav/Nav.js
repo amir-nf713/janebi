@@ -123,11 +123,14 @@ export default function Nav({ targetRef }) {
         
         // Check all variants for available stock
         product.devaiceOK.forEach(variant => {
-          variant.mojodi.forEach((stock, colorIndex) => {
+          if (variant.name === item.model) {
+             variant.mojodi.forEach((stock, colorIndex) => {
             if (item.indexcolor === colorIndex && stock > item.quantity) {
               canIncrease = true;
             }
-          });
+           });
+          }
+         
         });
   
         if (canIncrease) {
@@ -157,7 +160,6 @@ export default function Nav({ targetRef }) {
  
 let c = 0
 
- 
 
 
 

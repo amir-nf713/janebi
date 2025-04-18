@@ -34,6 +34,23 @@ function SearchComponen() {
     setselectedIndexColor(index)
   };
 
+  const [Item, setItem] = useState({
+    onvan: "",
+    categori: "",
+    berand: "",
+    color: "",
+    money: "",
+    offer: "",
+    tozih: "",
+    photo: "",
+    smallTozih: "",
+    devaiceOK: "",
+    garanti: "",
+    star: "",
+    nazarat: "",
+    _id: "",
+  });
+
   
   const carts = Cookies.get("cart");
   const eee = (e) => {
@@ -50,7 +67,7 @@ function SearchComponen() {
     return () => window.removeEventListener("storage", getCartItems);
   }, []);
 
-  const addToCart = (item) => {
+  const addToCart = async (item) => {
     let cart = Cookies.get("cart");
     cart = cart ? JSON.parse(cart) : [];
 
@@ -70,7 +87,7 @@ function SearchComponen() {
 
     // ذخیره دوباره در کوکی
     Cookies.set("cart", JSON.stringify(cart), { expires: 1 }); // داده‌ها ۷ روز حفظ می‌شوند
-
+  
     router.push("/")
   };
 
@@ -146,22 +163,7 @@ function SearchComponen() {
   //   }
   // }, [id, router]);
 
-  const [Item, setItem] = useState({
-    onvan: "",
-    categori: "",
-    berand: "",
-    color: "",
-    money: "",
-    offer: "",
-    tozih: "",
-    photo: "",
-    smallTozih: "",
-    devaiceOK: "",
-    garanti: "",
-    star: "",
-    nazarat: "",
-    _id: "",
-  });
+ 
 
   useEffect(() => {
     if (_id) {

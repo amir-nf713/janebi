@@ -9,6 +9,8 @@ export default function ItemSerrc(props) {
   const gotoCategiri = (e) => {
     router.push(`/sellItem?id=${props.id}`);
   };
+
+  
   return (
     <div
       onClick={gotoCategiri}
