@@ -32,7 +32,7 @@ useEffect(() => {
 
   // /api/webdata/add/web/data/in/data/base/
   const ff = ()=>{
-    axios.get("http://185.190.39.92:3001/api/webdata/add/web/data/in/data/base/")
+    axios.get("https://janebi-speed.ir/api/webdata/add/web/data/in/data/base/")
     .then(data => alert("دیتا اضافه شد دیگر کلیک نکنید"))
   }
         
