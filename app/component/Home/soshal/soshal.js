@@ -3,9 +3,7 @@ import apiKey from '@/app/API';
 import axios from 'axios'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import { FaTelegram } from "react-icons/fa";
-import { FaSquareInstagram } from "react-icons/fa6";
-import { IoLogoWhatsapp } from "react-icons/io";
+
 
 
 export default function Soshal() {
