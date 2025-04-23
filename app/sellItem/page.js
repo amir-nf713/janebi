@@ -530,7 +530,7 @@ useEffect(() => {
       onChange={(e) => setselectedColor(e.target.value)}
       className="w-11/12 p-3 text-lg desktop-s:text-2xl bg-white border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
     >
-      <option value="">رنگ مورد نظر را انتخاب کنید</option>
+      <option value="">رنگ و کد طرح را انتخاب کنید</option>
 
       {Array.isArray(Item.color) &&
         Item.color.map((color, index) => {
@@ -712,14 +712,13 @@ useEffect(() => {
             })
           }
           className="bg-blue-950 max-Wide-mobile-s:w-[55%] max-Wide-mobile-s:flex max-Wide-mobile-s:justify-center max-Wide-mobile-s:items-center max-Wide-mobile-s:text-xs max-Wide-mobile-s:h-[80%] text-white px-6 py-3 rounded-lg text-lg font-bold flex items-center disabled:bg-gray-400 disabled:cursor-not-allowed max-mobile-xl:w-[60%]"
-          disabled={!selectedColor || !selectedQuantity }
+          disabled={!selectedQuantity }
         >
           <BsBasket2Fill className="ml-2" />
-          {selectedColor === "" ? (
-            <> یک رنگ انتخواب کن </>
-          ) : (
+          
+         
             <>افزودن به سبد خرید</>
-          )}
+          
         </button>
       )}
         
