@@ -25,7 +25,7 @@ function SearchComponen() {
   const [ico, setico] = useState(<GrFavorite />);
   const [selectedColor, setselectedColor] = useState("");
   const [selectedIndexColor, setselectedIndexColor] = useState("");
-  const [mojodiColor, setmojodiColor] = useState("");
+  const [mojodiColor, setmojodiColor] = useState(0);
   const [selectedQuantity, setselectedQuantity] = useState(1);
   const [cartItems, setCartItems] = useState([]);
   const [ee, setee] = useState("");
@@ -337,6 +337,19 @@ useEffect(() => {
     }
   }
 }, [ee, selectedColor, selectedIndexColor, Item.devaiceOK]);
+
+useEffect(() => {
+  if (ee && selectedColor) {
+    const selectedDevice = Item.devaiceOK?.find(device => device.name === ee);
+    const colorIndex = Item.color?.findIndex(c => c === selectedColor);
+    const quantity = selectedDevice?.mojodi?.[colorIndex];
+
+    setmojodiColor(quantity || 0); // مقدار موجودی رو ذخیره می‌کنیم
+  } else {
+    setmojodiColor(0);
+  }
+}, [ee, selectedColor]);
+
   
 
   return (
@@ -475,10 +488,7 @@ useEffect(() => {
                 </div>
               </div>
 
-              {mojodiColor > 0 && mojodiColor < 2 ? (
-  <p className="text-red-600 text-xl">فقط {mojodiColor} عدد مانده است</p>
-) : (<></>)
-}  
+
             </div>
           </div>
         </div>
@@ -512,34 +522,42 @@ useEffect(() => {
   )
 }
 
-<div className="flex flex-wrap justify-center w-full laptop-xl:w-3/5 mt-4">
-  {Array.isArray(Item.color) &&
-    Item.color.map((color, index) => {
-      // بررسی موجودی رنگ
-      const isAvailable = Item.devaiceOK?.some(device => 
-        device.name === ee && 
-        device.mojodi?.[index] > 0
-      );
+<div className="flex flex-wrap w-full justify-center  mt-4">
+{ee && (
+  <div className="w-full flex flex-col justify-center items-center mt-4">
+    <select
+      value={selectedColor}
+      onChange={(e) => setselectedColor(e.target.value)}
+      className="w-11/12 p-3 text-lg desktop-s:text-2xl bg-white border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+    >
+      <option value="">رنگ مورد نظر را انتخاب کنید</option>
 
-      // اگر ee خالی است یا رنگ موجود است، نمایش بده
-      if (ee !== "" && isAvailable) {
-        return (
-          <button
-            key={index}
-            className="m-2 w-10 h-10 rounded-full border-2 border-black color-circle"
-            style={{ backgroundColor: color }}
-            onClick={(e) => {
-              document.querySelectorAll(".color-circle").forEach(el => 
-                el.classList.remove("active")
-              );
-              e.currentTarget.classList.add("active");
-              colorHandler(color, index);
-            }}
-          ></button>
-        );
-      }
-      return null;
-    })}
+      {Array.isArray(Item.color) &&
+        Item.color.map((color, index) => {
+          const selectedDevice = Item.devaiceOK?.find(device => device.name === ee);
+          const quantity = selectedDevice?.mojodi?.[index];
+
+          if (quantity > 0) {
+            return (
+              <option key={index} value={color}>
+                {color}
+              </option>
+            );
+          }
+          return null;
+        })}
+    </select>
+
+    {mojodiColor === 1 && (
+      <p className="text-red-600 text-center mt-2 font-bold">
+        فقط یک عدد از این رنگ باقی مانده!
+      </p>
+    )}
+  </div>
+)}
+
+
+
 </div>
               
       </div>

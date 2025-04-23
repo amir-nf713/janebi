@@ -14,7 +14,7 @@ export default function Page() {
     onvan: "",
     selectCategori: "",
     berand: "",
-    colors: ["#000000"],
+    colors: [""],
     money: "",
     off: "",
     miniTozih: "",
@@ -105,7 +105,7 @@ export default function Page() {
 
   const plusColor = () => setFormData(prevData => ({
     ...prevData,
-    colors: [...prevData.colors, "#000000"],
+    colors: [...prevData.colors, ""],
     allDevise: prevData.allDevise.map(dev => ({
       ...dev,
       mojodi: [...dev.mojodi, 0]
@@ -251,16 +251,16 @@ export default function Page() {
         {colors.map((color, index) => (
           <input 
             key={index} 
-            type="color" 
+            type="text" 
             value={color} 
             onChange={(e) => handleColorChange(index, e.target.value)} 
-            className="m-2 w-14 h-14 cursor-pointer" 
+            className="m-2 w-28 pr-3 h-14 cursor-pointer" 
           />
         ))}
       </div>
       <div className="flex">
-        <button onClick={plusColor} className="bg-black text-white p-2 m-2">+ رنگ</button>
-        <button onClick={dashColor} className="bg-red-600 text-white p-2 m-2">- رنگ</button>
+        <button onClick={plusColor} className="bg-black text-white p-2 m-2">کد  کالا +</button>
+        <button onClick={dashColor} className="bg-red-600 text-white p-2 m-2">کد  کالا -</button>
       </div>
 
       <input 
@@ -349,9 +349,9 @@ export default function Page() {
               {colors.map((color, colorIndex) => (
                 <div key={colorIndex} className="flex items-center gap-2">
                   <div 
-                    className="w-6 h-6 rounded-full border border-gray-300"
-                    style={{ backgroundColor: color }}
-                  />
+                    className="w-16 h-6 flex justify-center items-center rounded border border-gray-300"
+                    
+                  >{color} </div>
                   <span className="text-sm">موجودی:</span>
                   <input
                     type="number"

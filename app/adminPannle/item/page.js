@@ -258,11 +258,11 @@ export default function Page() {
                                                     <p className="text-slate-500 font-extrabold text-lg">{item.tozih?.[0]}</p>
                                                 </div>
                                             </div>
-                                            <div className="flex flex-row mr-7">
+                                            {/* <div className="flex flex-row mr-7">
                                                 {item.color?.map((color, index) => (
-                                                    <div key={index} className="m-1 size-10 rounded-full border-4 border-black" style={{ backgroundColor: color }} />
+                                                    <div key={index} className="m-1 size-10 rounded border flex justify-center items-center border-black"  >{color}</div>
                                                 ))}
-                                            </div>
+                                            </div> */}
                                         </div>
                                         <div className="ml-10 flex flex-col mt-11">
                                             <div className="flex max-mobile-xl:flex-col">
@@ -352,9 +352,9 @@ export default function Page() {
                                                 return (
                                                     <div key={colorIndex} className="flex items-center space-x-3 bg-white p-3 rounded">
                                                         <div 
-                                                            className="size-8 rounded-full border-2 border-black flex-shrink-0"
-                                                            style={{ backgroundColor: color }}
-                                                        />
+                                                            className="size-8 rounded text-sm m-1 flex justify-center items-center border border-black flex-shrink-0"
+                                                            
+                                                        >{color}</div>
                                                         <input
                                                             type="number"
                                                             value={formData.stock[inputKey] ?? initialValue}

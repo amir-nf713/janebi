@@ -21,6 +21,7 @@ import apiKey from "@/app/API";
 import { FaPlus, FaTrashAlt } from "react-icons/fa";
 import { GoDash } from "react-icons/go";
 import Categoris from "../catecoris/Categoris";
+import { color } from "framer-motion";
 
 
 
@@ -394,9 +395,9 @@ let c = 0
                <div className="max-mobile-xlk:mt-3 justify-center items-center text-lg font-semibold  flex flex-row">
                   {Math.floor((((product.money / 100) * (100 - product.offer) / 1000) * 1000) * cartItem.quantity).toLocaleString()} تومان
                   <div
-                    className="w-6 h-6 mr-5 rounded-full border border-black"
-                    style={{ background: cartItem.color }}
-                  ></div>
+                    className="w-10 h-9 mr-5 rounded flex justify-center items-center border text-sm border-black"
+                    
+                  >{cartItem.color}</div>
                 </div>
 
               </div>

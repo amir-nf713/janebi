@@ -317,10 +317,9 @@ const CheckoutPage = () => {
                     {(discountedPrice * (cartItem.quantity || 1)).toLocaleString()} تومان
                     {cartItem.color && (
                       <div
-                        className="w-6 h-6 mr-5 rounded-full border border-black"
-                        style={{ backgroundColor: cartItem.color }}
+                        className="w-10 h-9 mr-5 rounded flex justify-center items-center text-sm border border-black"
                         aria-label="رنگ محصول"
-                      ></div>
+                      >{cartItem.color}</div>
                     )}
                   </div>
                 </div>
