@@ -1,5 +1,6 @@
 "use client"
-export const dynamic = 'force-dynamic'; // تضمین رندر سمت کلاینت
+
+export const dynamic = 'force-dynamic';  // به بالای فایل صفحه اصلی اضافه کنید
 import Image from "next/image";
 import HomeBanner from "./component/Home/Banner/HomeBanner";
 import SearchInput from "./component/Home/main/searchInput";
