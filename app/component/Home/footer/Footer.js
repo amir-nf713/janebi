@@ -119,7 +119,19 @@ export default function Footer() {
 
     <div className="flex flex-row-reverse justify-between items-center h-1/2">
       <div className="flex flex-row max-tablet-l:flex-col">
-      <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=611160&Code=PIogAhIkslqyWyi5iAl1zyZjirFvpH3I'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=611160&Code=PIogAhIkslqyWyi5iAl1zyZjirFvpH3I' alt='' style='cursor:pointer' code='PIogAhIkslqyWyi5iAl1zyZjirFvpH3I'></a>
+      <a
+  href="https://trustseal.enamad.ir/?id=611160&Code=PIogAhIkslqyWyi5iAl1zyZjirFvpH3I"
+  target="_blank"
+  rel="noreferrer"
+>
+  <img
+    src="https://trustseal.enamad.ir/logo.aspx?id=611160&Code=PIogAhIkslqyWyi5iAl1zyZjirFvpH3I"
+    alt="نماد اعتماد الکترونیکی"
+    style={{ cursor: "pointer" }}
+  />
+</a>
+
+      {/* <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=611160&Code=PIogAhIkslqyWyi5iAl1zyZjirFvpH3I'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=611160&Code=PIogAhIkslqyWyi5iAl1zyZjirFvpH3I' alt='' style='cursor:pointer' code='PIogAhIkslqyWyi5iAl1zyZjirFvpH3I'></a> */}
       </div>
 
       <div className="flex flex-col items-end mx-28 max-laptop-xl:mx-8">
