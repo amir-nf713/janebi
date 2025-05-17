@@ -119,14 +119,7 @@ export default function Footer() {
 
     <div className="flex flex-row-reverse justify-between items-center h-1/2">
       <div className="flex flex-row max-tablet-l:flex-col">
-        <img src="/enamad.png" alt="e-namd" height="80px" width="100px" />
-        <img
-          src="/namad-01.png"
-          alt="namad"
-          height="80px"
-          width="100px"
-        />
-        <img src="/rezi.png" alt="namad" height="80px" width="100px" />
+      <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=611160&Code=PIogAhIkslqyWyi5iAl1zyZjirFvpH3I'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=611160&Code=PIogAhIkslqyWyi5iAl1zyZjirFvpH3I' alt='' style='cursor:pointer' code='PIogAhIkslqyWyi5iAl1zyZjirFvpH3I'></a>
       </div>
 
       <div className="flex flex-col items-end mx-28 max-laptop-xl:mx-8">
