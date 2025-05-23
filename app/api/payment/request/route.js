@@ -25,9 +25,14 @@ export async function POST(req) {
     } else {
       return new Response(JSON.stringify({ error: "خطا در درخواست پرداخت" }), { status: 400 });
     }
-  } catch (error) {
-    console.error("Payment request error:", error.response ? error.response.data : error.message);
+  }catch (error) {
+    if (error.response) {
+      console.error("Payment request error:", error.response.data);
+    } else {
+      console.error("Payment request error:", error.message);
+    }
     return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
+  
   
 }
