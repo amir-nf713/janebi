@@ -31,6 +31,7 @@ export default function Singup() {
         number: Number
       })
       .then((data) => {
+        
         setSmsCode(data.data.data.code);
         setSmsNumber(data.data.data.number);
         
@@ -61,10 +62,10 @@ export default function Singup() {
     if (SmsCode === TrueCode && SmsNumber === Number) {
       const apigetuser = apiKey.getOneUser;
       const apigetadmin = apiKey.getOneAdmin;
-      axios.get(`${apigetadmin}${Number}`)
+      axios.get(`${apigetadmin}/${Number}`)
       .then((data) => {
         if (data.data.massage === "cant find admins") {
-          axios.get(`${apigetuser}${Number}`)
+          axios.get(`${apigetuser}/${Number}`)
           .then((data) => {
             if (data.data.massage === "cant find user") {
               seterrTrueCode("");
@@ -75,6 +76,8 @@ export default function Singup() {
                 codeDavat: code
               })
               .then((data) => {
+                console.log(data);
+                
                 setUserCookie(data.data.data._id);
                 router.push("/UserPannle");
               });

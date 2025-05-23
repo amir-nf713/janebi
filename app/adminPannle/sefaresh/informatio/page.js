@@ -8,51 +8,139 @@ function BasketPage() {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
 
-  const [basket, setBasket] = useState(null); // مقدار اولیه null است
+  const [basket, setBasket] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [updating, setUpdating] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   useEffect(() => {
     if (id) {
+      setLoading(true);
       axios.get(`${apiKey.bascket}/${id}`)
         .then(response => {
           if (response.data.data) {
-            setBasket(response.data.data); // دیگر نیازی به `[]` نیست
+            setBasket(response.data.data);
           }
         })
-        .catch(error => console.error("Error fetching data:", error));
+        .catch(error => {
+          console.error("Error fetching data:", error);
+          setError("خطا در دریافت اطلاعات");
+        })
+        .finally(() => setLoading(false));
     }
   }, [id]);
 
-  if (!basket) {
+  const handleConfirm = async () => {
+    if (!basket) return;
+    setUpdating(true);
+    setError("");
+    setSuccess("");
+
+    try {
+      const response = await axios.put(`${apiKey.bascket}/${basket.shenase}`, {
+       
+        vazeiat: "در حال ارسال"
+      });
+      if (response.status === 200 || response.status === 201) {
+        setBasket(prev => ({ ...prev, vazeiat: "در حال ارسال" }));
+        setSuccess("وضعیت سفارش با موفقیت به 'در حال ارسال' تغییر کرد.");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("خطا در بروزرسانی وضعیت سفارش");
+    } finally {
+      setUpdating(false);
+    }
+  };
+
+  if (loading) {
     return <div className="text-center text-xl font-semibold p-5">در حال بارگذاری...</div>;
   }
 
+  if (error) {
+    return <div className="text-center text-red-600 font-semibold p-5">{error}</div>;
+  }
+
+  if (!basket) {
+    return <div className="text-center text-gray-600 font-semibold p-5">اطلاعاتی یافت نشد</div>;
+  }
+
   return (
-    <div className='w-full flex justify-center items-center h-[95vh] flex-col'>
-      {[
-        { label: "وضعیت", value: basket.vazeiat },
-        { label: "اسم", value: basket.name },
-        { label: "شهر", value: basket.shahr },
-        { label: "استان", value: basket.ostan },
-        { label: "شماره", value: basket.phoneNumber },
-        { label: "آدرس", value: basket.address },
-        { label: "کد پستی", value: basket.postCode },
-        { label: "شناسه سفارش", value: basket.shenase },
-        { label: "تاریخ", value: basket.date },
-        { label: "آیدی کاربر", value: basket.userId },
-        { label: "مبلغ سفارش", value: basket.money },
-      ].map((item, index) => (
-        <div key={index} className="bg-white my-1 flex flex-row items-center justify-between px-3 w-11/12 h-14">
-          <div className="text-xl text-black font-semibold">{item.label}</div>
-          <div className="text-lg text-sky-500 font-semibold">{item.value}</div>
+    <div className='w-full max-w-3xl mx-auto p-6 bg-gray-50 rounded-md shadow-md mt-8'>
+
+      <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">جزئیات سبد خرید</h1>
+
+      <div className="mb-6 bg-white rounded-md shadow p-4">
+        <h2 className="text-xl font-semibold mb-4 border-b pb-2">کالاهای خریداری شده</h2>
+        {basket.value && basket.value.length > 0 ? (
+          <ul className="space-y-3">
+            {basket.value.map((item, idx) => (
+              <li
+                key={idx}
+                className="flex justify-between items-center bg-gray-100 p-3 rounded-md"
+              >
+                <div>
+                  <p><span className="font-semibold">مدل:</span> {item.model}</p>
+                  <p><span className="font-semibold">رنگ:</span> {item.color}</p>
+                </div>
+                <div className="text-blue-700 font-semibold text-lg">تعداد: {item.quantity}</div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-500">هیچ کالایی در این سبد وجود ندارد.</p>
+        )}
+      </div>
+
+      <div className="mb-6 bg-white rounded-md shadow p-4">
+        {[ 
+          { label: "وضعیت", value: basket.vazeiat },
+          { label: "اسم", value: basket.name },
+          { label: "شهر", value: basket.shahr },
+          { label: "استان", value: basket.ostan },
+          { label: "شماره", value: basket.phoneNumber },
+          { label: "آدرس", value: basket.address },
+          { label: "کد پستی", value: basket.postCode },
+          { label: "شناسه سفارش", value: basket.shenase },
+          { label: "تاریخ", value: new Date(basket.date).toLocaleString() },
+          { label: "آیدی کاربر", value: basket.userId },
+          { label: "مبلغ سفارش", value: basket.money?.toLocaleString() + " تومان" },
+        ].map((item, index) => (
+          <div
+            key={index}
+            className="flex justify-between py-2 border-b last:border-b-0 border-gray-200"
+          >
+            <span className="font-semibold text-gray-700">{item.label}:</span>
+            <span className="text-gray-900">{item.value || "-"}</span>
+          </div>
+        ))}
+      </div>
+
+      {success && (
+        <div className="mb-4 text-green-600 font-semibold text-center">
+          {success}
         </div>
-      ))}
+      )}
+
+      <button
+        onClick={handleConfirm}
+        disabled={updating || basket.vazeiat === "در حال ارسال"}
+        className={`w-full py-3 rounded-md text-white font-bold transition
+          ${basket.vazeiat === "در حال ارسال"
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-green-600 hover:bg-green-700"}
+        `}
+      >
+        {updating ? "در حال بروزرسانی..." : basket.vazeiat === "در حال ارسال" ? "سفارش در حال ارسال است" : "تایید و ارسال سفارش"}
+      </button>
     </div>
   );
 }
 
 export default function Page() {
   return (
-    <Suspense fallback={<div>در حال بارگذاری...</div>}>
+    <Suspense fallback={<div className="text-center p-5">در حال بارگذاری...</div>}>
       <BasketPage />
     </Suspense>
   );

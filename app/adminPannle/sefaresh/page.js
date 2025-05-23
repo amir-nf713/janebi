@@ -1,53 +1,109 @@
-"use client"
-import apiKey from '@/app/API'
-import axios from 'axios'
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react'
-import { FaTrashAlt } from "react-icons/fa";
+"use client";
+import React, { useEffect, useState } from "react";
+import apiKey from "@/app/API";
+import axios from "axios";
+import Link from "next/link";
 
-export default function page() {
+export default function Page() {
+  const [bascket, setBascket] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    const [bascket, setbascket] = useState([]);
+  // تابع فرمت تاریخ با فارسی سازی کامل
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "-";
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return "-";
+  
+    return date.toLocaleDateString("fa-IR", {
+      // year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+  
 
-    useEffect(() => {
-        const fetchData = () => {
-            axios.get(apiKey.bascket)
-                .then(response => {
-                    const newData = response.data.data;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(apiKey.bascket);
+        const newData = response.data.data;
 
-                    // مرتب‌سازی داده‌ها، ابتدا آیتم‌هایی که وضعیت "تمام شده" دارند
-                    const sortedData = newData.sort((a, b) => {
-                        if (a.vazeiat === 'تمام شده' && b.vazeiat !== 'تمام شده') return 1; // a بالا
-                        if (a.vazeiat !== 'تمام شده' && b.vazeiat === 'تمام شده') return -1; // b بالا
-                        return 0; // در غیر این صورت ترتیب تغییر نکند
-                    });
+        // مرتب‌سازی به نحوی که سفارشات "تمام شده" پایین‌تر باشند
+        const sortedData = newData.sort((a, b) => {
+          if (a.vazeiat === "تمام شده" && b.vazeiat !== "تمام شده")
+            return 1;
+          if (a.vazeiat !== "تمام شده" && b.vazeiat === "تمام شده")
+            return -1;
+          return 0;
+        });
 
-                    setbascket(sortedData); // داده‌های مرتب‌شده رو ذخیره کن
-                })
-                .catch(error => console.error("Error fetching data:"));
-        };
+        setBascket(sortedData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-        fetchData(); // یکبار در ابتدا اجرا بشه
+    fetchData();
+    const interval = setInterval(fetchData, 15000);
 
-        const interval = setInterval(fetchData, 10000); // هر ۱۰ ثانیه اجرا بشه
+    return () => clearInterval(interval);
+  }, []);
 
-        return () => clearInterval(interval); // توقف interval در هنگام unmount
-    }, [bascket]); // وابستگی به `bascket` برای بررسی تغییرات
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-sky-500"></div>
+      </div>
+    );
+  }
 
   return (
-    <div className='w-full font-dorna h-[95vh] overflow-y-auto flex flex-col'>
-      {
-        bascket.map((item, index) => {
-            return (
-               <div key={index} className="text-2xl h-20 font-extrabold bg-white flex flex-row justify-around items-center my-3">
-                  <div className="text-slate-400">{item.date}</div>
-                  <div className="text-slate-400">{item.shenase}</div>
-                  <div className="text-slate-400">{item.vazeiat}</div>
-                  <Link href={`/adminPannle/sefaresh/informatio?id=${item._id}`} className="bg-sky-500 text-white rounded-xl w-40 h-14 flex justify-center items-center ">مشاهده</Link>
-               </div>
-            );
-        })
-      }
+    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 p-8">
+      <h1 className="text-3xl font-extrabold text-center mb-10 text-sky-700">
+        لیست سفارشات کاربران
+      </h1>
+
+      {bascket.length === 0 && (
+        <p className="text-center text-gray-600 text-xl mt-20">سبد خریدی موجود نیست.</p>
+      )}
+
+      <div className="max-w-6xl mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {bascket.map((item) => (
+          <div
+            key={item._id}
+            className="bg-white rounded-xl shadow-lg p-6 flex flex-col justify-between hover:shadow-2xl transition-shadow duration-300"
+          >
+            <div>
+              <h2 className="text-xl font-bold text-gray-800 mb-3">
+                شناسه سفارش: <span className="text-sky-600">{item.shenase}</span>
+              </h2>
+              <p className="text-gray-600 mb-1">
+                تاریخ: <span className="font-semibold">{formatDate(item.date)}</span>
+              </p>
+              <p className="text-gray-600 mb-1">
+                وضعیت:{" "}
+                <span
+                  className={`font-bold ${
+                    item.vazeiat === "تمام شده" ? "text-red-500" : "text-green-600"
+                  }`}
+                >
+                  {item.vazeiat}
+                </span>
+              </p>
+            </div>
+
+            <Link
+              href={`/adminPannle/sefaresh/informatio?id=${item._id}`}
+              className="mt-6 bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 rounded-lg text-center transition-colors"
+            >
+              مشاهده جزئیات
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

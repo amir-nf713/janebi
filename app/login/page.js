@@ -58,12 +58,12 @@ export default function Login() {
     if (SmsCode === TrueCode && SmsNumber === Number) {
       const getOneUser = apiKey.getOneUser;
       const getOneAdmin = apiKey.getOneAdmin;
-      axios.get(`${getOneAdmin}${Number}`)
+      axios.get(`${getOneAdmin}/${Number}`)
       .then((data) => {
         if (data.data.login === "true") {
           router.push("/adminPannle");
         } else {
-          axios.get(`${getOneUser}${Number}`)
+          axios.get(`${getOneUser}/${Number}`)
           .then((data) => {
             if (data.data.login === "true") {
               setUserCookie(data.data.data._id);
