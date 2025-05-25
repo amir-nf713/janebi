@@ -17,8 +17,7 @@ export async function GET(req) {
       });
 
       if (response.data.data.code === 100) {
-        // سفارش رو از localStorage بگیر و ذخیره کن
-        // چون سمت سرور هستیم، راه حل بهتر اینه که اطلاعات سفارش با Authority یا کوکی ذخیره شده باشه
+       
 
         return new Response(`
           <html>

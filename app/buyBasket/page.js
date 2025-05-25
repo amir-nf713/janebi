@@ -392,7 +392,7 @@ const CheckoutPage = () => {
         )}
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4 max-Wide-mobile-4xl:mb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label htmlFor="firstName" className="block mb-2">
@@ -548,7 +548,7 @@ const CheckoutPage = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-bold transition disabled:bg-gray-400"
+          className="w-full  bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-bold transition disabled:bg-gray-400"
           disabled={cartItems.length === 0 || loading}
         >
           {loading ? "در حال پردازش..." : "پرداخت و تکمیل خرید"}

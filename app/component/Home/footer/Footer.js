@@ -16,19 +16,24 @@ import apiKey from "@/app/API";
 
 
 export default function Footer() {
-  const [Basket, setBasket] = useState([]);
+  const [ins, setins] = useState("");
+  const [wat, setwat] = useState("");
+  const [tel, settel] = useState("");
 
   useEffect(() => {
-    
-      axios.get(apiKey.Web) // اضافه کردن `/` برای درستی URL
-        .then(response => {
-          if (response.data.data) {
-            setBasket([response.data.data]); // تبدیل شیء به آرایه برای جلوگیری از خطا
+      const fetchSocialLinks = async () => {
+          try {
+              const response = await axios.get(apiKey.Web);
+              setins(response?.data?.data?.[0]?.instagram || "");
+              setwat(response?.data?.data?.[0]?.wahtsapp || "");
+              settel(response?.data?.data?.[0]?.telegram || "");
+          } catch (err) {
+              console.error("Failed to fetch social links:", err);
           }
-        })
-        .catch(error => console.error("Error fetching data:"));
-    
-  }, []); // وابستگی به `id`
+      };
+
+      fetchSocialLinks();
+  }, []);
   return (
     <footer className="h-[760px] bg-[#d2d2d2] flex pb-4 flex-col">
     <div className="flex h-1/2 max-tablet-l:flex-wrap max-tablet-l:justify-center items-center flex-row border-b-4 border-slate-900 justify-between">
@@ -119,17 +124,8 @@ export default function Footer() {
 
     <div className="flex flex-row-reverse justify-between items-center h-1/2">
       <div className="flex flex-row max-tablet-l:flex-col">
-      <a
-  href="https://trustseal.enamad.ir/?id=611160&Code=PIogAhIkslqyWyi5iAl1zyZjirFvpH3I"
-  target="_blank"
-  rel="noreferrer"
->
-  <img
-    src="https://trustseal.enamad.ir/logo.aspx?id=611160&Code=PIogAhIkslqyWyi5iAl1zyZjirFvpH3I"
-    alt="نماد اعتماد الکترونیکی"
-    style={{ cursor: "pointer" }}
-  />
-</a>
+      <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=611160&Code=PIogAhIkslqyWyi5iAl1zyZjirFvpH3I'><img src='https://trustseal.enamad.ir/logo.aspx?id=611160&Code=PIogAhIkslqyWyi5iAl1zyZjirFvpH3I' alt='' style='cursor:pointer' code='PIogAhIkslqyWyi5iAl1zyZjirFvpH3I' /></a>
+
 
       {/* <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=611160&Code=PIogAhIkslqyWyi5iAl1zyZjirFvpH3I'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=611160&Code=PIogAhIkslqyWyi5iAl1zyZjirFvpH3I' alt='' style='cursor:pointer' code='PIogAhIkslqyWyi5iAl1zyZjirFvpH3I'></a> */}
       </div>
@@ -144,13 +140,13 @@ export default function Footer() {
                   
 
 
-                  <Link className="mx-3" href={`${item.instagram}`}>
+                  <Link className="mx-3" href={`${ins}`}>
                       <FaInstagram />
                   </Link>
-                  <Link className="mx-3" href={`${item.wahtsapp}`}>
+                  <Link className="mx-3" href={`${wat}`}>
                       <IoLogoWhatsapp />
                   </Link>
-                  <Link className="mx-3" href={`${item.telegram}`}>
+                  <Link className="mx-3" href={`${tel}`}>
                       <RiTelegramLine />
                   </Link>
 
