@@ -1,12 +1,11 @@
-import axios from "axios";
-
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const Authority = searchParams.get("Authority");
   const Status = searchParams.get("Status");
   const amount = parseInt(searchParams.get("amount"), 10);
-
   const merchant_id = "1d4d1c16-4308-4dd9-ae32-bd6eb2f5d86f";
+
+  let success = "false";
 
   if (Status === "OK") {
     try {
@@ -17,25 +16,19 @@ export async function GET(req) {
       });
 
       if (response.data.data.code === 100) {
-       
-
-        return new Response(`
-          <html>
-            <head><meta http-equiv="refresh" content="0; url=/UserPannle/Basket?success=true" /></head>
-            <body>پرداخت موفق بود، در حال انتقال...</body>
-          </html>
-        `, {
-          headers: { "Content-Type": "text/html" },
-        });
-      } else {
-        return new Response("پرداخت ناموفق بود ❌", { status: 400 });
+        success = "true";
       }
     } catch (error) {
-      return new Response("❗ خطا در بررسی پرداخت", { status: 500 });
+      success = "false";
     }
-  } else {
-    return new Response("پرداخت لغو شد ❌", { status: 400 });
   }
+
+  return new Response(`
+    <html>
+      <head><meta http-equiv="refresh" content="0; url=/UserPannle/Basket?success=${success}" /></head>
+      <body>در حال بازگشت...</body>
+    </html>
+  `, {
+    headers: { "Content-Type": "text/html" },
+  });
 }
-
-

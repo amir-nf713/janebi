@@ -162,7 +162,7 @@ const CheckoutPage = () => {
         cartItems,
         formData,
         finalPrice,
-        cookies,
+        cookies : Cookies.get("id"),
       }));
   
       const res = await axios.post("/api/payment/request", {

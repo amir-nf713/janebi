@@ -13,6 +13,11 @@ function BasketPage() {
   const [updating, setUpdating] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [postcode, setpostcode] = useState(null);
+
+  const postcodee = (e) => {
+    setpostcode(e.target.value)
+  }
 
   useEffect(() => {
     if (id) {
@@ -40,7 +45,8 @@ function BasketPage() {
     try {
       const response = await axios.put(`${apiKey.bascket}/${basket.shenase}`, {
        
-        vazeiat: "در حال ارسال"
+        vazeiat: "در حال ارسال",
+        postCode :postcode
       });
       if (response.status === 200 || response.status === 201) {
         setBasket(prev => ({ ...prev, vazeiat: "در حال ارسال" }));
@@ -122,18 +128,27 @@ function BasketPage() {
           {success}
         </div>
       )}
+      <div className="w-full flex justify-center items-center">
+
+      <input type="text" className='w-11/12 px-3 h-12 mb-3 border-2' placeholder='کد رهگیری را وارد کنید'  value={postcode} onChange={postcodee} />
+      </div>
 
       <button
-        onClick={handleConfirm}
-        disabled={updating || basket.vazeiat === "در حال ارسال"}
-        className={`w-full py-3 rounded-md text-white font-bold transition
-          ${basket.vazeiat === "در حال ارسال"
-            ? "bg-gray-400 cursor-not-allowed"
-            : "bg-green-600 hover:bg-green-700"}
-        `}
-      >
-        {updating ? "در حال بروزرسانی..." : basket.vazeiat === "در حال ارسال" ? "سفارش در حال ارسال است" : "تایید و ارسال سفارش"}
-      </button>
+  onClick={handleConfirm}
+  disabled={updating || basket.vazeiat === "در حال ارسال" || !postcode?.trim()}
+  className={`w-full py-3 rounded-md text-white font-bold transition
+    ${basket.vazeiat === "در حال ارسال" || !postcode?.trim()
+      ? "bg-gray-400 cursor-not-allowed"
+      : "bg-green-600 hover:bg-green-700"}
+  `}
+>
+  {updating
+    ? "در حال بروزرسانی..."
+    : basket.vazeiat === "در حال ارسال"
+    ? "سفارش در حال ارسال است"
+    : "تایید و ارسال سفارش"}
+</button>
+
     </div>
   );
 }

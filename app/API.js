@@ -2,6 +2,7 @@ const Url = 'https://janebi-speed.ir';
  
 const apiKey = ({
     sendSms: `${Url}/api/register/sms/smsSend`,
+    sendSmsq: `${Url}/api/register/sms/smsSendq`,
     postUser: `${Url}/api/register/user/`,
     getOneUser: `${Url}/api/register/user/`,
     getOneUserid: `${Url}/api/register/user/ida`,
@@ -24,6 +25,7 @@ const apiKey = ({
     gif: `${Url}/api/Gitcode`,
     user: `${Url}/api/register/user`,
 });
+// 
 
 
 export default apiKey

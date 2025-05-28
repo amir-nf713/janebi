@@ -38,7 +38,7 @@ export default function Page() {
           return 0;
         });
 
-        setBascket(sortedData);
+        setBascket(sortedData.reverse());
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
