@@ -140,9 +140,9 @@ const CheckoutPage = () => {
 
     const Id = Cookies.get("id")
     if (!Id) {
-      router.push("/login")
-      
-    }else{
+      router.push("/login");
+      return; // جلوگیری از ادامه اجرای تابع
+    }
 
       if (cartItems.length === 0) {
         setError("سبد خرید شما خالی است");
@@ -188,7 +188,7 @@ const CheckoutPage = () => {
         console.error("خطا در درخواست پرداخت:", error);
         setError("خطا در درخواست پرداخت. لطفاً مجدداً تلاش کنید.");
       }
-    }
+    
 
 
     
