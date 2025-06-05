@@ -9,79 +9,12 @@ export default function Page() {
 
   
   useEffect(() => {
-    const updateInventory = async (cartItems) => {
-      try {
-        const res = await axios.get(apiKey.getitem);
-        const items = res.data.data;
-  
-        for (const elementa of cartItems) {
-          const item = items.find(el => el._id === elementa.id);
-          if (!item) continue;
-  
-          const colorIndex = item.color.findIndex(c => c === elementa.color);
-          if (colorIndex === -1) continue;
-  
-          const devaiceOk = item.devaiceOK.find(d => d.name === elementa.model);
-          if (!devaiceOk) continue;
-  
-          const updatedMojodi = [...devaiceOk.mojodi];
-          updatedMojodi[colorIndex] = Math.max(updatedMojodi[colorIndex] - elementa.quantity, 0);
-  
-          const updatedDevaiceOK = item.devaiceOK.map(d =>
-            d.name === devaiceOk.name ? { ...d, mojodi: updatedMojodi } : d
-          );
-  
-          await axios.put(`${apiKey.getitem}/${item._id}`, {
-            devaiceOK: updatedDevaiceOK,
-          });
-        }
-      } catch (err) {
-        console.log("Inventory update error:", err);
-      }
-    };
-  
+   
     const handlePayment = async () => {
-      const params = new URLSearchParams(window.location.search);
-      const successParam = params.get("success");
-      const pendingOrder = JSON.parse(localStorage.getItem("pendingOrder"));
-  
-      if (successParam === "true" || successParam === "false") {
-        if (pendingOrder) {
-          if (successParam === "true") {
-            try {
-              await axios.post(apiKey.bascket, {
-                value: pendingOrder.cartItems,
-                name: `${pendingOrder.formData.firstName} ${pendingOrder.formData.lastName}`,
-                shahr: pendingOrder.formData.city,
-                ostan: pendingOrder.formData.province,
-                phoneNumber: pendingOrder.formData.mobile,
-                address: pendingOrder.formData.address,
-                postCode: pendingOrder.formData.postalCode,
-                userId: pendingOrder.cookies,
-                money: pendingOrder.finalPrice,
-              });
-  
-              await updateInventory(pendingOrder.cartItems);
-  
-              axios.post(apiKey.sendSmsq, {
-                number : pendingOrder.formData.mobile,
-                name : `${pendingOrder.formData.firstName} ${pendingOrder.formData.lastName}`
-              }).then(data => {
-                
-                
-              })
-  
+   
               localStorage.removeItem("pendingOrder");
               Cookies.remove("cart");
-            } catch (err) {
-              console.log("Order error:", err);
-            }
-          } else {
-            localStorage.removeItem("pendingOrder");
-          }
-        }
-      }
-    };
+    }
   
     handlePayment();
   }, []);
