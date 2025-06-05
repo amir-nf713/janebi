@@ -137,50 +137,62 @@ const CheckoutPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const Id = Cookies.get("id")
+    if (!Id) {
+      router.push("/login")
+      
+    }else{
+
+      if (cartItems.length === 0) {
+        setError("سبد خرید شما خالی است");
+        return;
+      }
   
-    if (cartItems.length === 0) {
-      setError("سبد خرید شما خالی است");
-      return;
+      if (
+        !formData.firstName ||
+        !formData.lastName ||
+        !formData.mobile ||
+        !formData.province ||
+        !formData.city ||
+        !formData.postalCode ||
+        !formData.address
+      ) {
+        setError("لطفا تمام فیلدهای ضروری را پر کنید");
+        return;
+      }
+  
+      try {
+        const response = await axios.post(apiKey.pay, {
+          amount: finalPrice,
+          userId: Cookies.get("id"),
+          value: cartItems,
+  
+          name: `${formData.firstName} ${formData.lastName}`,
+          shahr: formData.city,
+          ostan: formData.province,
+          phoneNumber: formData.mobile,
+          address: formData.address,
+          postCode: formData.postalCode,
+  
+          date: Date.now(),
+          money: finalPrice,
+        });
+  
+        if (response.data.url) {
+          window.location.href = response.data.url;
+        } else {
+          setError("مشکلی در ارسال درخواست پرداخت پیش آمده است.");
+        }
+      } catch (error) {
+        console.error("خطا در درخواست پرداخت:", error);
+        setError("خطا در درخواست پرداخت. لطفاً مجدداً تلاش کنید.");
+      }
     }
-  
-    if (
-      !formData.firstName ||
-      !formData.lastName ||
-      !formData.mobile ||
-      !formData.province ||
-      !formData.city ||
-      !formData.postalCode ||
-      !formData.address
-    ) {
-      setError("لطفا تمام فیلدهای ضروری را پر کنید");
-      return;
-    }
-  
-    try {
-      // ذخیره موقت اطلاعات سفارش در لوکال‌استوریج
-      localStorage.setItem("pendingOrder", JSON.stringify({
-        cartItems,
-        formData,
-        finalPrice,
-        cookies : Cookies.get("id"),
-      }));
-  
-      const res = await axios.post("/api/payment/request", {
-        amount: Number(finalPrice * 10),
-        description: "خرید از فروشگاه جانبی‌اسپید",
-        mobile: formData.mobile,
-        email: ""
-      });
-  
-      const { url } = res.data;
-      window.location.href = url; // انتقال به درگاه پرداخت
-    } catch (error) {
-      setError("مشکلی در اتصال به درگاه پرداخت پیش آمده");
-      console.error(error);
-    }
+
+
+    
   };
-  
-  
 
   const updateCart = useCallback((updatedCart) => {
     setCartItems(updatedCart);
@@ -392,7 +404,10 @@ const CheckoutPage = () => {
         )}
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4 max-Wide-mobile-4xl:mb-12">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-4 max-Wide-mobile-4xl:mb-12"
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label htmlFor="firstName" className="block mb-2">

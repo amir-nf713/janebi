@@ -29,6 +29,7 @@ function SearchComponen() {
   const [selectedQuantity, setselectedQuantity] = useState(1);
   const [cartItems, setCartItems] = useState([]);
   const [ee, setee] = useState("");
+  const [dis, setdis] = useState("hidden");
   const colorHandler = (e, index) => {
     setselectedColor(e);
     setselectedIndexColor(index)
@@ -88,7 +89,12 @@ function SearchComponen() {
     // ذخیره دوباره در کوکی
     Cookies.set("cart", JSON.stringify(cart), { expires: 1 }); // داده‌ها ۷ روز حفظ می‌شوند
   
-    router.push("/")
+    setdis("flex")
+
+    setTimeout(() => {
+      
+      router.push("/")
+    }, 1000);
   };
 
 
@@ -729,6 +735,14 @@ useEffect(() => {
           تومان
         </div>
       </div>
+
+
+ 
+          <div className={`fixed top-5 right-6 ${dis} animate-bounce transition-all h-14 text-xl font-extrabold justify-center items-center rounded-lg w-60 bg-green-500 text-white`}>
+            محصول به سبد خرید اضافه شد
+          </div>
+
+
     </div>
   );
 

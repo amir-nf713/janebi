@@ -24,6 +24,9 @@ const apiKey = ({
     Offer: `${Url}/api/Offercode`,
     gif: `${Url}/api/Gitcode`,
     user: `${Url}/api/register/user`,
+    pay: `${Url}/api/basket/pay`,
+    verify: `${Url}/api/basket/verify`,
+    // user: `${Url}/api/register/user`,
 });
 // 
 
