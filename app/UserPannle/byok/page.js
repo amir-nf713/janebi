@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { CheckCircle } from "lucide-react";
+import Cookies from "js-cookie";
 
 export default function PaymentSuccess() {
   const searchParams = useSearchParams();
@@ -10,6 +11,9 @@ export default function PaymentSuccess() {
   const amount = searchParams.get("amount");
 
   useEffect(() => {
+
+    localStorage.removeItem("pendingOrder");
+    Cookies.remove("cart");
     const timer = setTimeout(() => {
       window.location.href = "/UserPannle/Basket";
     }, 3000);

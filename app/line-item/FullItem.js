@@ -77,7 +77,7 @@ export default function FullItem() {
        <div className="flex justify-center font-dorna font-semibold  mb-3">
         <h1 className="text-4xl max-Wide-mobile-l:text-xl">تخفیف دار ها</h1>
        </div>
-        <div className="flex flex-row ">
+        <div className="flex flex-row">
         <LineItem item={
             allOffers.map((offer, index) => (
           <Itemserach

@@ -8,16 +8,7 @@ export default function Page() {
   
 
   
-  useEffect(() => {
-   
-    const handlePayment = async () => {
-   
-              localStorage.removeItem("pendingOrder");
-              Cookies.remove("cart");
-    }
-  
-    handlePayment();
-  }, []);
+
   
 
   const cookies = Cookies.get("id");

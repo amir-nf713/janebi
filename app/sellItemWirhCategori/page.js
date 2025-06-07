@@ -14,10 +14,6 @@ import { BsList } from "react-icons/bs";
 import { BsXLg } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 
-
-
-
-
 function SearchCompone() {
   const router = useRouter();
   const jh = (e) => {
@@ -36,21 +32,22 @@ function SearchCompone() {
     axios
       .get(apiKey.getitem)
       .then((response) => {
-        const filteredData = response.data.data.filter(
-          (res) => res.categori === onvan
-        );
-        setCategori(filteredData); // مقدار جدید را مستقیماً تنظیم کنید
+        const filteredData = response.data.data.filter((res) => {
+          const result = res.categori.trim() === onvan.trim();
+          console.log(result, onvan.trim(), res.categori.trim());
+          return result; // خیلی مهم: return کنیم
+        });
+        setCategori(filteredData);
       })
       .catch((error) => console.error("Error fetching data:", error));
-  }, []); // وابستگی `onvan` اضافه شد
+  }, [onvan]); // وابستگی به `onvan` باید اضافه شود
+  
 
   // 📌 فیلتر کردن و ذخیره دستگاه‌ها
   useEffect(() => {
     const newDevaice = [];
 
     Categori.map((item, index) => {
-      
-       
       if (item.categori === onvan) {
         item.devaiceOK.forEach((device) => {
           if (!newDevaice.includes(device.name)) {
@@ -98,7 +95,8 @@ function SearchCompone() {
           onClick={clickhanler}
           className="p-4 hidden max-laptop-xl:flex text-3xl w-full items-center flex-row-reverse justify-start "
         >
-          <span className="font-black text-xl mx-1">بستن</span><IoMdClose />
+          <span className="font-black text-xl mx-1">بستن</span>
+          <IoMdClose />
         </button>
         <h1 className="p-6 text-2xl font-extrabold w-full border-b-2 border-sky-500">
           فیلتر بر اساس مدل
@@ -124,20 +122,21 @@ function SearchCompone() {
                   }
                 }}
               >
-               <div className="focus:bg-slate-300 w-[95%] h-[97%] rounded-full flex items-center justify-between p-2">
-                <div className="flex items-center justify-center flex-row-reverse">
-                  <div className="font-bold text-sm mx-2">{item}</div>
-                  <input
-                    type="checkbox"
-                    className="size-4"
-                    checked={selectedDevices.includes(item)}
-                    onChange={() => toggleDevice(item)}
-                    onClick={(e) => e.stopPropagation()} // جلوگیری از اجرای onClick والد هنگام کلیک روی checkbox
-                  />
+                <div className="focus:bg-slate-300 w-[95%] h-[97%] rounded-full flex items-center justify-between p-2">
+                  <div className="flex items-center justify-center flex-row-reverse">
+                    <div className="font-bold text-sm mx-2">{item}</div>
+                    <input
+                      type="checkbox"
+                      className="size-4"
+                      checked={selectedDevices.includes(item)}
+                      onChange={() => toggleDevice(item)}
+                      onClick={(e) => e.stopPropagation()} // جلوگیری از اجرای onClick والد هنگام کلیک روی checkbox
+                    />
+                  </div>
+                  <div className="text-xl">
+                    <BiArrowToLeft />
+                  </div>
                 </div>
-                <div className="text-xl"><BiArrowToLeft /></div>
-              
-               </div>
               </div>
             ))}
         </div>
@@ -150,13 +149,16 @@ function SearchCompone() {
           onClick={clickhanler}
           className="max-laptop-xl:flex hidden text-sky-700 text-4xl justify-end flex-row-reverse items-center  w-full justif items mb-3"
         >
-          <span className="text-lg font-black mx-2">مشاهده فیلتر ها</span><BsList />
+          <span className="text-lg font-black mx-2">مشاهده فیلتر ها</span>
+          <BsList />
         </button>
         <div className="max-Wide-mobile-s:flex max-Wide-mobile-s:flex-wrap max-Wide-mobile-s:gap-2  max-Wide-mobile-s:flex-row max-Wide-mobile-s:justify-end ">
           {Categori.filter(
             (item) =>
               selectedDevices.length === 0 || // ✅ اگر هیچ فیلتری انتخاب نشده باشد، همه را نمایش بده
-              item.devaiceOK.some((device) => selectedDevices.includes(device.name)) // ✅ بررسی اینکه حداقل یک دستگاه انتخاب شده باشد
+              item.devaiceOK.some((device) =>
+                selectedDevices.includes(device.name)
+              ) // ✅ بررسی اینکه حداقل یک دستگاه انتخاب شده باشد
           ).map((item, index) => (
             <div
               onClick={() => jh(item._id)}

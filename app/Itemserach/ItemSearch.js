@@ -20,7 +20,7 @@ export default function ItemSerrc(props) {
         <img
           src={props.img}
           alt="img"
-          className="w-[97%] max-Wide-mobile-s:h-[120px] max-mobile-l:rounded-xl max-mobile-l:h-24 h-[350px] rounded-2xl mb-2 max-Wide-mobile-4xl:h-40 max-laptop-xl:h-52"
+          className="w-[97%] object-cover max-Wide-mobile-s:h-[120px] max-mobile-l:rounded-xl max-mobile-l:h-24 h-[340px] rounded-2xl mb-2 max-Wide-mobile-4xl:h-40 max-laptop-xl:h-52"
         ></img>
         <div className="max-mobile-l:justify-center max-mobile-l:mt-1 max-mobile-l:items-center max-Wide-mobile-s:my-0 max-mobile-l:mr-0  w-full flex items-start flex-col mr-4 my-3 max-mobile-l:-my-2">
           <p className="max-mobile-l:hidden max-Wide-mobile-s:hidden  font-extrabold text-2xl text-slate-500 max-laptop-xl:text-xl max-Wide-mobile-l:text-sm ">
